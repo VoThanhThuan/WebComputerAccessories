@@ -148,6 +148,8 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ViewModel\DataJson.cs" />
+    <Compile Include="Models\ViewModel\ProductsMV.cs" />
     <Compile Include="Models\WebAccessoriesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
