@@ -15,39 +15,42 @@
     <link rel="stylesheet/less" href="~/Content/base.less">
 </head>
 <body>
-    <div class="nav-wrapper">
-        <div class="container">
-            <div class="nav">
-                <a href="#" class="logo">
-                    <!-- <i class='bx bx-book-bookmark bx-tada'></i><span> -->
-                    <img src="" alt="">
-                    &nbsp;<i class='bx bx-movie-play bx-tada main-color'></i>Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span>
-                </a>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#"><svg viewBox="0 0 26.6 25.6"><polyline fill="none" points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5"></polyline><circle cx="10.7" cy="23" r="2.2" stroke="none"></circle><circle cx="19.7" cy="23" r="2.2" stroke="none"></circle></svg>&nbsp;Giỏ Hàng</a></li>
-                    <li>
-                        <form class="form-search">
-                            <div class="search">
-                                <input type="text" placeholder="Nhập tên truyện...">
-                                <span><i class="fas fa-search"></i></span>
-                            </div>
-                        </form>
-                    </li>
+<div class="nav-wrapper" style="background-color: blueviolet">
+    <div class="container">
+        <div class="nav">
+            <a href="#" class="logo">
+                <!-- <i class='bx bx-book-bookmark bx-tada'></i><span> -->
+                <img src="" alt="">
+                &nbsp;<i class='bx bx-movie-play bx-tada main-color'></i>Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#"><svg viewBox="0 0 26.6 25.6"><polyline fill="none" points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5"></polyline><circle cx="10.7" cy="23" r="2.2" stroke="none"></circle><circle cx="19.7" cy="23" r="2.2" stroke="none"></circle></svg>&nbsp;Giỏ Hàng</a></li>
+                <li>
+                    <form class="form-search">
+                        <div class="search">
+                            <input type="text" placeholder="Nhập tên truyện...">
+                            <span><i class="fas fa-search"></i></span>
+                        </div>
+                    </form>
+                </li>
 
-                    <li>
-                        <a href="#" class="btn btn-hover">
-                            <span>Sign in</span>
-                        </a>
-                    </li>
-                </ul>
-                <!-- MOBILE MENU TOGGLE -->
-                <div class="hamburger-menu" id="hamburger-menu">
-                    <div class="hamburger"></div>
-                </div>
+                <li>
+                    <a href="#" class="btn btn-hover">
+                        <span>Sign in</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- MOBILE MENU TOGGLE -->
+            <div class="hamburger-menu" id="hamburger-menu">
+                <div class="hamburger"></div>
             </div>
         </div>
     </div>
+</div>
+<div style="margin-top: 20px" class="container">
     @RenderBody()
+</div>
+
 </body>
 <!-- JQUERY -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

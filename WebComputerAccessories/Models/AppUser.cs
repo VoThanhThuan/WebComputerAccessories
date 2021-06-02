@@ -1,4 +1,4 @@
-namespace WebComputerAccessories.Models
+﻿namespace WebComputerAccessories.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,27 +17,34 @@ namespace WebComputerAccessories.Models
 
         public Guid Id { get; set; }
 
+        [Display(Name = "Tài khoản")]
         [StringLength(255)]
         public string Username { get; set; }
 
+        [Display(Name = "Mật khẩu")]
         [StringLength(255)]
         public string PasswordHash { get; set; }
 
         [StringLength(255)]
         public string Email { get; set; }
 
+        [Display(Name = "Tên")]
         [StringLength(50)]
         public string Firstname { get; set; }
 
+        [Display(Name = "Họ")]
         [StringLength(50)]
         public string Lastname { get; set; }
 
+        [Display(Name = "SĐT")]
         [StringLength(12)]
         public string PhoneNumber { get; set; }
 
+        [Display(Name = "Ngày sinh")]
         [Column(TypeName = "date")]
         public DateTime? Dob { get; set; }
 
+        [Display(Name = "Ảnh đại diện")]
         public string Avatar { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
