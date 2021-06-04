@@ -4,4 +4,5 @@ $(document).ready(() => {
         $('#nav-menu').toggleClass('active');
     });
 
-})
+});
+const $$ = document.querySelector.bind(document);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,8 +15,9 @@ namespace WebComputerAccessories.Controllers
     {
         private WebAccessoriesModel db = new WebAccessoriesModel();
         public ActionResult Index(){
+            db.Products.Load();
             var proct = db.Products.Select(x => x).ToList();
-            var json = JsonConvert.SerializeObject(new ProductsMV().ConvertMV(proct));
+            var json = JsonConvert.SerializeObject(new ProductMV().ConvertMV(proct));
             return View(new DataJson() { Data = json });
         }
 

@@ -40,11 +40,11 @@
         [StringLength(12)]
         public string PhoneNumber { get; set; }
 
-        [Display(Name = "Ngày sinh")]
+        [Display(Name = "Ngày Sinh")]
         [Column(TypeName = "date")]
         public DateTime? Dob { get; set; }
 
-        [Display(Name = "Ảnh đại diện")]
+        [Display(Name = "Ảnh Đại Diện")]
         public string Avatar { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

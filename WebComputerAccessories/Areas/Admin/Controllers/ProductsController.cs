@@ -4,9 +4,12 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebComputerAccessories.Areas.Admin.Service;
 using WebComputerAccessories.Models;
+using WebComputerAccessories.Models.ViewModel;
 
 namespace WebComputerAccessories.Areas.Admin.Controllers
 {
@@ -48,14 +51,19 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Stock,DateCreated,Image,Details,IdCategory")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Name,Price,Stock,DateCreated,DataImage,Details,IdCategory")] ProductMV product)
         {
             if (ModelState.IsValid)
             {
                 product.Id = Guid.NewGuid();
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                var result = new ProductService().Create(product);
+
+                if (!result.IsSuccessed)
+                {
+                    ModelState.AddModelError("", result.Message);
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.IdCategory = new SelectList(db.Categories, "Id", "Name", product.IdCategory);
@@ -102,7 +110,7 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -115,9 +123,9 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            var result = new ProductService().Delete(id);
+            if(!result.IsSuccessed)
+                ModelState.AddModelError("", result.Message);
             return RedirectToAction("Index");
         }
 

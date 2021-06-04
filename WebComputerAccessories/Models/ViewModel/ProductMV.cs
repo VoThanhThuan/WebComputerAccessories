@@ -5,11 +5,11 @@ using System.Web;
 
 namespace WebComputerAccessories.Models.ViewModel
 {
-    public class ProductsMV
+    public class ProductMV
     {
-        public List<ProductsMV> ConvertMV(List<Product> request)
+        public List<ProductMV> ConvertMV(List<Product> request)
         {
-            return request.Select(item => new ProductsMV()
+            return request.Select(item => new ProductMV()
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -21,6 +21,21 @@ namespace WebComputerAccessories.Models.ViewModel
                     IdCategory = item.IdCategory
                 })
                 .ToList();
+        }
+        public Product ConvertOrigin(ProductMV request)
+        {
+            return new Product()
+            {
+                Id = request.Id,
+                Name = request.Name,
+                Price = request.Price,
+                Stock = request.Stock,
+                DateCreated = request.DateCreated,
+                Image = request.Image,
+                Details = request.Details,
+                IdCategory = request.IdCategory
+            };
+
         }
         public string Json { get; set; }
 
@@ -34,6 +49,8 @@ namespace WebComputerAccessories.Models.ViewModel
         public int? Stock { get; set; }
 
         public DateTime? DateCreated { get; set; }
+
+        public HttpPostedFileBase DataImage { get; set; }
 
         public string Image { get; set; }
 
