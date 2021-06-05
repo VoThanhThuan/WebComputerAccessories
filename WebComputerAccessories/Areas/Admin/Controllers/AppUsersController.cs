@@ -6,8 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebComputerAccessories.Areas.Admin.Service;
 using WebComputerAccessories.Models;
-
+using WebComputerAccessories.Models.ViewModel;
 namespace WebComputerAccessories.Areas.Admin.Controllers
 {
     public class AppUsersController : Controller
@@ -46,17 +47,16 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Username,PasswordHash,Email,Firstname,Lastname,PhoneNumber,Dob,Avatar")] AppUser appUser)
+        public ActionResult Create([Bind(Include = "Id,Username,PasswordHash,Email,Firstname,Lastname,PhoneNumber,Dob,AvatarData")] AppUserVM appUser)
         {
-            if (ModelState.IsValid)
-            {
-                appUser.Id = Guid.NewGuid();
-                db.AppUsers.Add(appUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(appUser);
+            appUser.Id = Guid.NewGuid();
 
-            return View(appUser);
+            var result = new AppUserService().Create(appUser);
+            if (result.IsSuccessed) return RedirectToAction("Index");
+            ModelState.AddModelError("", result.Message);
+            return RedirectToAction("Index");
+
         }
 
         // GET: Admin/AppUsers/Edit/5
@@ -110,9 +110,9 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            AppUser appUser = db.AppUsers.Find(id);
-            db.AppUsers.Remove(appUser);
-            db.SaveChanges();
+            var result = new AppUserService().Delete(id);
+            if (!result.IsSuccessed)
+                ModelState.AddModelError("", result.Message);
             return RedirectToAction("Index");
         }
 
