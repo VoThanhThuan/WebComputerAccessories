@@ -12,9 +12,36 @@
     --space-top: 30px;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    background: #fff;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: var( --main-color);
+}
 a {
     text-decoration: none;
     color: unset;
+    cursor: pointer;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+body {
+    overflow-x: hidden;
 }
 
 #previewImg{
@@ -38,6 +65,18 @@ svg {
     max-width: 1920px;
     padding: 0 40px;
     margin: auto;
+}
+
+.cl-3 {
+    width: 25%;
+}
+
+.cl-4 {
+    width: 33.33%;
+}
+
+.cl-8 {
+    width: 66.66%;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -83,3 +122,8 @@ svg {
         width: 100%;
     }
 }
+
+
+
+
+

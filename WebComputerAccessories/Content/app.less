@@ -193,3 +193,123 @@
 .btn-hover:hover::before {
     width: 100%;
 }
+
+/*Footer*/
+footer {
+    padding-top: 80px;
+    position: relative;
+    background-color: var(--box-bg);
+    color: var(--text-color);
+
+
+    .content {
+        margin: 20px 0;
+
+        .logo {
+            margin-top: -2.5rem;
+            display: block;
+            font-size: 30px;
+
+            .main-color {
+                color: var(--main-color);
+            }
+
+            i {
+                color: var(--main-color);
+            }
+        }
+
+        .logo:hover {
+            color: unset;
+        }
+
+        .social-list {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+
+            .social-item {
+                --size: 30px;
+                height: var(--size);
+                width: var(--size);
+                display: grid;
+                place-items: center;
+                border-radius: 50%;
+                background-color: var(--text-color);
+                color: var(--main-color);
+            }
+
+            .social-item:hover {
+                background-color: var(--main-color);
+                color: var(--text-color);
+            }
+
+            .social-item ~ .social-item {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .footer-menu {
+        list-style-type: none;
+
+        a {
+            display: inline-block;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        a:hover {
+            transform: translateX(5px);
+        }
+    }
+
+    a:hover {
+        color: var(--main-color);
+    }
+
+    img {
+        width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+        color: unset;
+    }
+
+    ul {
+        padding-left: 0;
+    }
+
+    .copyright {
+        padding: 10px;
+        border-top: 1px solid var(--body-bg);
+        background-color: var(--box-bg);
+        text-align: center;
+    }
+}
+
+/*Back-to-top*/
+.back-to-top {
+    font-size: 20px;
+    color: #fff;
+    position: fixed;
+    right: 5px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    background: var(--main-color);
+    text-align: center;
+    z-index: 999;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+   
+}
+
+.back-to-top:hover {
+    color: unset;
+}
