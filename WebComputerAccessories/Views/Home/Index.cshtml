@@ -12,11 +12,19 @@
         var render = () => {
             const products = data.map(x => {
                 return `
-                    <div>${x.Id}</div>
-                    <div>${x.Name}</div>
-                    <div>${x.Price}</div>
-                    <div>${x.Stock}</div>
-                    <img src="${x.Image}" />
+                     <div class="card-wrapper col-lg-3 col-md-4 col-sm-5 col-12 tlt mt-3">
+                        <a href="">
+                            <div class="card-product">
+                                <div class="pd-img">
+                                    <img class="img-product" src="${x.Image}" alt="">
+                                </div>
+                                <div class="infor">
+                                    <div class="name">${x.Name}</div>
+                                    <strong class="price">${x.Price}₫</strong>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 `;
             });
 

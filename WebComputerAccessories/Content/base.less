@@ -31,6 +31,10 @@ a {
     cursor: pointer;
 }
 
+img, svg {
+    vertical-align: unset !important;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -42,6 +46,7 @@ html{
 }
 body {
     overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 img {
@@ -65,6 +70,17 @@ svg{
     max-width: 1920px;
     padding: 0 40px;
     margin: auto;
+}
+
+.row {
+    padding: 0 40px;
+}
+
+@media (min-width: 992px) {
+    .col-lg-3 {
+        flex: 0 0 auto;
+        width: 20%;
+    }
 }
 
 .cl-3 {
