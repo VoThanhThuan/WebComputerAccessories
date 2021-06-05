@@ -16,7 +16,11 @@ svg#freepik_stories-welcome.animated #freepik--characters-with-banner--inject-1-
     animation: 1.5s 1 forwards cubic-bezier(.36,-0.01,.5,1.38) zoomIn,1.5s Infinite linear floating;
     animation-delay: 0s,1.5s;
 }
-
+.animated {
+    width: 100% !important;
+    height: 100% !important;
+    stroke: none;
+}
 @keyframes slideLeft {
     0% {
         opacity: 0;

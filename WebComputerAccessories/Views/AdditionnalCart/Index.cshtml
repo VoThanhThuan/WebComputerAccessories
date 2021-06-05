@@ -30,7 +30,7 @@
                             <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="svg-icon "><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon></svg>
                         </a>
                     </span>
-                    <input type="text" class="input-amount itoutline" value="1" />
+                    <input type="text" class="input-amount itoutline" onkeypress="" value="1" />
                     <span>
                         <a href="" class="itoutline">
                             <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="svg-icon"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
@@ -50,3 +50,14 @@
 <p>
     @Html.ActionLink("Trở lại", "Index", "Home")
 </p>
+
+@section Scripts {
+    <script>
+
+        let inputOnlyNumber = () => {
+            if ( isNaN( String.fromCharCode(event.keyCode) )) return false;
+        }
+        $$('.input-amount').onkeypress = inputOnlyNumber;
+
+    </script>
+}
