@@ -3,12 +3,13 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="render"></div>
+<div class="render row"></div>
 
 @section Scripts {
     <script>
-        var data = @Html.Raw(Model.Data);
         /*<div>${(new Date(x.DateCreated)).toLocaleDateString()}</div>*/
+        var data = @Html.Raw(Model.Data);
+       
         var render = () => {
             const products = data.map(x => {
                 return `
@@ -20,7 +21,7 @@
                                 </div>
                                 <div class="infor">
                                     <div class="name">${x.Name}</div>
-                                    <strong class="price">${x.Price}₫</strong>
+                                    <strong class="price">${(new Intl.NumberFormat('de-DE').format(x.Price))}₫</strong>
                                 </div>
                             </div>
                         </a>
@@ -31,7 +32,6 @@
             $$('.render').innerHTML = products.join('');
         };
         render();
-
 
     </script>
 }

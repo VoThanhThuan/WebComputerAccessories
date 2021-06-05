@@ -1,4 +1,4 @@
-const $$ = document.querySelector.bind(document);
+﻿const $$ = document.querySelector.bind(document);
 let backToTop = () => {
     window.onscroll = () => {
         const scrollTop = $$('.back-to-top');
@@ -6,6 +6,8 @@ let backToTop = () => {
     }
 }
 backToTop();
+
+
 var app = {
 
     js: function () {
@@ -27,6 +29,4 @@ var app = {
     }
 }
 app.start();
-
-const $$ = document.querySelector.bind(document);
 
