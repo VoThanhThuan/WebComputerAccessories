@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Loài Hàng</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -24,9 +24,11 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <a href="/Admin/categories/Edit/@item.Id" class="badge rounded-pill bg-primary"><i class="fad fa-edit"></i> Edit </a> |
+
+            <a href="/Admin/categories/Details/@item.Id" class="badge rounded-pill bg-success"><i class="fad fa-info-circle"></i> Details </a> |
+
+            <a href="/Admin/categories/Delete/@item.Id" class="badge rounded-pill bg-danger"><i class="fad fa-trash"></i> Delete </a>
         </td>
     </tr>
 }

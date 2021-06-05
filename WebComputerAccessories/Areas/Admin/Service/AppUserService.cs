@@ -40,9 +40,10 @@ namespace WebComputerAccessories.Areas.Admin.Service
                 request.Avatar = $@"/Storage/avatar/{fileName}";
 
             }
+
+            request.PasswordHash = new Encrypt().EncryptSHA256(request.PasswordHash);
             db.AppUsers.Add(request.ConvertOrigin());
             db.SaveChanges();
-
             return new ResultSuccess<string>("OK");
         }
 
@@ -51,15 +52,13 @@ namespace WebComputerAccessories.Areas.Admin.Service
             var user = db.AppUsers.Find(id);
             if (user == null) return new ResultError<string>("Mã hàng không tồn tại");
 
-            var filePath = Path.Combine(System.Web.HttpContext.Current.Server.MapPath($"{user.Avatar}"));
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
+            new ImageService().DeleteImage(user.Avatar);
+
             db.AppUsers.Remove(user);
             db.SaveChanges();
             return new ResultSuccess<string>();
         }
+
 
     }
 }
