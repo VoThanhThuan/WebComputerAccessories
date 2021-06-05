@@ -168,6 +168,7 @@
     <Content Include="Content\app.js" />
     <Content Include="Content\images\app-store.png" />
     <Content Include="Content\images\google-play.png" />
+    <Content Include="Content\svg.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
