@@ -28,3 +28,5 @@ var app = {
 }
 app.start();
 
+const $$ = document.querySelector.bind(document);
+

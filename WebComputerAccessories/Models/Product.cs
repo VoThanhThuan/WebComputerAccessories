@@ -1,3 +1,5 @@
+﻿using System.Web;
+
 namespace WebComputerAccessories.Models
 {
     using System;
@@ -17,17 +19,22 @@ namespace WebComputerAccessories.Models
 
         public Guid Id { get; set; }
 
+        [Display(Name = "Tên Sản Phẩm")]
         [StringLength(255)]
         public string Name { get; set; }
 
+        [Display(Name = "Giá")]
         public double? Price { get; set; }
 
+        [Display(Name = "Số Lượng Tồn")]
         public int? Stock { get; set; }
 
+        [Display(Name = "Ngày Tạo")]
         public DateTime? DateCreated { get; set; }
 
+        [Display(Name = "Hình Ảnh")]
         public string Image { get; set; }
-
+        [Display(Name = "Chi Tiết")]
         public string Details { get; set; }
 
         public int? IdCategory { get; set; }
