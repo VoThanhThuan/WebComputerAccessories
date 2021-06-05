@@ -8,22 +8,22 @@
 <div class="cart-wrapper row">
     <div class="cart-left col-md-4">
         <div class="cart-image">
-            <img src="https://anphat.com.vn/media/product/35089_10.png" alt="">
+            <img src="@Model.Image" alt="">
         </div>
     </div>
     <div class="cart-right col-md-8">
         <div class="cart-information">
-            <span class="cti-name">CARD MÀN HÌNH NVIDIA QUADRO P2200 (5GB GDDR5, 160 BIT, 4 DP) (GIGABYTE)</span>
+            <span class="cti-name">@Model.Name</span>
             <div class="bg-price">
                 <span>Đơn giá: </span>
-                <span class="cti-price">360.000₫</span>
+                <span class="cti-price">@Model.Price₫</span>
             </div>
             <div class="bg-detail">
                 <span class="tt-detail">Mô tả: </span>
-                <span class="cti-detail">CARD MÀN HÌNH NVIDIA QUADRO P2200 (5GB GDDR5, 160 BIT, 4 DP) (GIGABYTE)</span>
+                <span class="cti-detail">@Model.Details</span>
             </div>
             <div class="bg-amount">
-                <div class="tt-amount">Số Lượng : </div>
+                <div class="tt-amount">Số Lượng : @Model.Stock</div>
                 <div class="input-gr">
                     <span>
                         <a href="" class="itoutline">
