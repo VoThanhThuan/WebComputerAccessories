@@ -12,7 +12,7 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             //var controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
-            if (Session["MaNguoiDung"] == null)
+            if (Session["MaNguoiDung"] == null || !(bool)Session["Quyen"])
             {
                 filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { action = "Index", controller = "Login" }));
             }
