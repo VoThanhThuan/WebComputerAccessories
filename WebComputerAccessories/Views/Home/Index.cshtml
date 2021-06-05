@@ -3,28 +3,27 @@
     ViewBag.Title = "Home Page";
 }
 
-
 <div class="render"></div>
 
-<script>
-    var data = @Html.Raw(Model.Data);
+@section Scripts {
+    <script>
+        var data = @Html.Raw(Model.Data);
+        /*<div>${(new Date(x.DateCreated)).toLocaleDateString()}</div>*/
+        var render = () => {
+            const products = data.map(x => {
+                return `
+                    <div>${x.Id}</div>
+                    <div>${x.Name}</div>
+                    <div>${x.Price}</div>
+                    <div>${x.Stock}</div>
+                    <img src="${x.Image}" />
+                `;
+            });
+
+            $$('.render').innerHTML = products.join('');
+        };
+        render();
 
 
-    //var data = [{ "Json": null, "Id": "0c4cae07-7d1e-4ecd-bcd5-6a2416db72e5", "Name": "sadasd", "Price": 1111, "Stock": 1111, "DateCreated": "\/Date(1612976400000)\/", "Image": null, "Details": null, "IdCategory": null }, { "Json": null, "Id": "5e2659e9-5b01-4a22-b129-e337ac177911", "Name": "son", "Price": 11, "Stock": 111, "DateCreated": "\/Date(1612976400000)\/", "Image": null, "Details": null, "IdCategory": null }, { "Json": null, "Id": "2b95ee4b-dc71-4012-a935-f79e853ef141", "Name": "wwwwwwwww", "Price": 11, "Stock": 11, "DateCreated": "\/Date(1612976400000)\/", "Image": null, "Details": null, "IdCategory": null }, { "Json": null, "Id": "1f64bdb1-3287-4de4-a895-fd1c47f973d2", "Name": "sadasd", "Price": 222, "Stock": 22, "DateCreated": "\/Date(1612976400000)\/", "Image": null, "Details": null, "IdCategory": null }];
-    const $$ = document.querySelector.bind(document);
-    var render = () => {
-        const products = data.map(x => {
-            return `
-                <div>${x.Id}</div>
-                <div>${(new Date(x.DateCreated)).toLocaleDateString()}</div>
-                <div>${x.Name}</div>
-                <div>${x.Price}</div>
-                <div>${x.Stock}</div>
-            `;
-        });
-
-        $$('.render').innerHTML = products.join('');
-    };
-    render();
-
-</script>
+    </script>
+}

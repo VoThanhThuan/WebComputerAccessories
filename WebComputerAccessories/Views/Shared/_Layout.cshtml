@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+     <!--Box icon-->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!--FONT AWESOME-->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <!--BOOTSTRAPS-->
@@ -19,16 +21,15 @@
         <div class="container">
             <div class="nav">
                 <a href="#" class="logo">
-                    <!-- <i class='bx bx-book-bookmark bx-tada'></i><span> -->
                     <img src="" alt="">
-                    &nbsp;<i class='bx bx-movie-play bx-tada main-color'></i>Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span>
+                    &nbsp;Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span>
                 </a>
                 <ul class="nav-menu" id="nav-menu">
                     <li><a href="#"><svg viewBox="0 0 26.6 25.6"><polyline fill="none" points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5"></polyline><circle cx="10.7" cy="23" r="2.2" stroke="none"></circle><circle cx="19.7" cy="23" r="2.2" stroke="none"></circle></svg>&nbsp;Giỏ Hàng</a></li>
                     <li>
                         <form class="form-search">
                             <div class="search">
-                                <input type="text" placeholder="Nhập tên truyện...">
+                                <input type="text" placeholder="Tìm kiếm...">
                                 <span><i class="fas fa-search"></i></span>
                             </div>
                         </form>
@@ -47,7 +48,90 @@
             </div>
         </div>
     </div>
-    @RenderBody()
+
+    <div class="container" style="margin: 100px 0 50px 0">
+        @RenderBody()
+    </div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="cl-4 cl-md-6 cl-sm-12">
+                <div class="content">
+                    <a href="#" class="logo">
+                        <i class='bx bxs-mouse-alt bx-tada'></i>&nbsp;&nbsp;Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span>
+                    </a>
+                    <p>
+                       Chuyên cung cấp các linh kiện máy tính chất lượng, chính hãng. Đến với chúng tối quý khách sẽ được đảm bảo sản phẩm chính hãng 100%. Với phương châm "Chất lượng hơn là số lượng!".
+                    </p>
+                    <div class="social-list">
+                        <a href="#" class="social-item">
+                            <i class="bx bxl-facebook"></i>
+                        </a>
+                        <a href="#" class="social-item">
+                            <i class="bx bxl-github"></i>
+                        </a>
+                        <a href="#" class="social-item">
+                            <i class="bx bxl-discord"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="cl-8 cl-md-6 cl-sm-12">
+                <div class="row">
+                    <div class="cl-3 cl-md-6 cl-sm-6">
+                        <p><b>Contact</b></p>
+                        <ul class="footer-menu">
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">My profile</a></li>
+                            <li><a href="#">Pricing plans</a></li>
+                            <li><a href="#">Contacts</a></li>
+                        </ul>
+                    </div>
+                    <div class="cl-3 cl-md-6 cl-sm-6">
+                        <p><b>Browse</b></p>
+                        <ul class="footer-menu">
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">My profile</a></li>
+                            <li><a href="#">Pricing plans</a></li>
+                            <li><a href="#">Contacts</a></li>
+                        </ul>
+                    </div>
+                    <div class="cl-3 cl-md-6 cl-sm-6">
+                        <p><b>Help</b></p>
+                        <ul class="footer-menu">
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">My profile</a></li>
+                            <li><a href="#">Pricing plans</a></li>
+                            <li><a href="#">Contacts</a></li>
+                        </ul>
+                    </div>
+                    <div class="cl-3 cl-md-6 cl-sm-6">
+                        <p><b>Download app</b></p>
+                        <ul class="footer-menu">
+                            <li>
+                                <a>
+                                    <img src="/Content/images/app-store.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img src="/Content/images/google-play.png" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            Copyright 2021 &copy; Sơn & Thuận DH19PM
+        </div>
+    </div>
+</footer>
+<a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
 </body>
 <!-- JQUERY -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
