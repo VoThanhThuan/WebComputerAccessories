@@ -13,11 +13,12 @@ using WebComputerAccessories.Models.ViewModel;
 
 namespace WebComputerAccessories.Areas.Admin.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private WebAccessoriesModel db = new WebAccessoriesModel();
 
         // GET: Admin/Products
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Category);
@@ -25,13 +26,14 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         }
 
         // GET: Admin/Products/Details/5
+        [AllowAnonymous]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -51,23 +53,18 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Stock,DateCreated,DataImage,Details,IdCategory")] ProductMV product)
+        public ActionResult Create([Bind(Include = "Id,Name,Price,Stock,DateCreated,DataImage,Details,IdCategory")] ProductVM product)
         {
-            if (ModelState.IsValid)
-            {
-                product.Id = Guid.NewGuid();
+            if (!ModelState.IsValid) return RedirectToAction("Index");
+            product.Id = Guid.NewGuid();
+            product.DateCreated = DateTime.Now;
+            var result = new ProductService().Create(product);
 
-                var result = new ProductService().Create(product);
-
-                if (!result.IsSuccessed)
-                {
-                    ModelState.AddModelError("", result.Message);
-                    return RedirectToAction("Index");
-                }
-            }
-
-            ViewBag.IdCategory = new SelectList(db.Categories, "Id", "Name", product.IdCategory);
+            if (result.IsSuccessed) return RedirectToAction("Index");
+            ModelState.AddModelError("", result.Message);
+            ViewBag.IdCategory = new SelectList(db.Categories, "Id", "Name");
             return View(product);
+
         }
 
         // GET: Admin/Products/Edit/5
@@ -77,13 +74,13 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IdCategory = new SelectList(db.Categories, "Id", "Name", product.IdCategory);
-            return View(product);
+            return View(product.ConvertToVM());
         }
 
         // POST: Admin/Products/Edit/5
@@ -91,11 +88,13 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Stock,DateCreated,Image,Details,IdCategory")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Name,Price,Stock,DateCreated,Image,DataImage,Details,IdCategory")] ProductVM product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                if (product.DataImage != null)
+                    product.Image = new ImageService().SaveImage(product.DataImage, "/Storage/").ResultObj;
+                db.Entry(product.ConvertToOrigin()).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

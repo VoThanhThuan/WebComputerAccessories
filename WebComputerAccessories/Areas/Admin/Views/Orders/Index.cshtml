@@ -5,7 +5,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@section css{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" />
+}
+
+<h2>Đặt Hàng</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -30,29 +34,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AppUser.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShipName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShipAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShipPhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppUser.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                <a href="/Admin/orders/Edit/@item.Id" class="badge rounded-pill bg-primary"><i class="fad fa-edit"></i> Edit </a> |
+
+                <a href="/Admin/orders/Details/@item.Id" class="badge rounded-pill bg-success"><i class="fad fa-info-circle"></i> Details </a> |
+
+                <a href="/Admin/orders/Delete/@item.Id" class="badge rounded-pill bg-danger"><i class="fad fa-trash"></i> Delete </a>
+            </td>
+        </tr>
+    }
 
 </table>
+@section Scripts{
+    @{
+        Html.RenderPartial("_ScriptTable");
+    }
+}

@@ -17,8 +17,15 @@ namespace WebComputerAccessories.Controllers
         public ActionResult Index(){
             db.Products.Load();
             var proct = db.Products.Select(x => x).ToList();
-            var json = JsonConvert.SerializeObject(new ProductMV().ConvertMV(proct));
+            var json = JsonConvert.SerializeObject(new Product().ConvertListVM(proct));
             return View(new DataJson() { Data = json });
+        }
+
+        public ContentResult GetProducts()
+        {
+            var proct = db.Products.Select(x => x).ToList();
+            var json = JsonConvert.SerializeObject(new Product().ConvertListVM(proct));
+            return Content(json, "application/json");
         }
 
         public ActionResult About()

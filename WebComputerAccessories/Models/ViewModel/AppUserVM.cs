@@ -21,10 +21,12 @@ namespace WebComputerAccessories.Models.ViewModel
                 Lastname = this.Lastname,
                 PhoneNumber = this.PhoneNumber,
                 Dob = this.Dob,
-                Avatar = this.Avatar
+                Avatar = this.Avatar,
+                Role = this.Role
             };
 
         }
+
         public Guid Id { get; set; }
 
         [Display(Name = "Tài khoản")]
@@ -67,5 +69,7 @@ namespace WebComputerAccessories.Models.ViewModel
         [Display(Name = "Ảnh Đại Diện")]
         public HttpPostedFileBase AvatarData { get; set; }
 
+        [Display(Name = "Quyền")]
+        public bool Role { get; set; }
     }
 }

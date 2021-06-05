@@ -1,4 +1,6 @@
-﻿namespace WebComputerAccessories.Models
+﻿using WebComputerAccessories.Models.ViewModel;
+
+namespace WebComputerAccessories.Models
 {
     using System;
     using System.Collections.Generic;
@@ -15,6 +17,23 @@
             Orders = new HashSet<Order>();
         }
 
+        public AppUserVM ConvertToVM()
+        {
+            return new AppUserVM()
+            {
+                Id = this.Id,
+                Username = this.Username,
+                PasswordHash = this.PasswordHash,
+                Email = this.Email,
+                Firstname = this.Firstname,
+                Lastname = this.Lastname,
+                PhoneNumber = this.PhoneNumber,
+                Dob = this.Dob,
+                Avatar = this.Avatar,
+                Role = this.Role
+            };
+
+        }
         public Guid Id { get; set; }
 
         [Display(Name = "Tài khoản")]
@@ -46,6 +65,9 @@
 
         [Display(Name = "Ảnh Đại Diện")]
         public string Avatar { get; set; }
+
+        [Display(Name = "Quyền")]
+        public bool Role { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
