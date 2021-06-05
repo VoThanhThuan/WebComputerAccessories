@@ -143,6 +143,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Service\AppUserService.cs" />
     <Compile Include="Areas\Admin\Service\ProductService.cs" />
+    <Compile Include="Controllers\AdditionnalCartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -235,6 +236,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="packages.config" />
+    <Content Include="Views\AdditionnalCart\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

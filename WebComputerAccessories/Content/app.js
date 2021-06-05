@@ -13,10 +13,10 @@ var app = {
     js: function () {
 
         let navBarMobile = () => {
-            window.$(document).ready(() => {
-                window.$('#hamburger-menu').click(() => {
-                    window.$('#hamburger-menu').toggleClass('active');
-                    window.$('#nav-menu').toggleClass('active');
+            $(document).ready(() => {
+                $('#hamburger-menu').click(() => {
+                    $('#hamburger-menu').toggleClass('active');
+                    $('#nav-menu').toggleClass('active');
                 });
             });
         }

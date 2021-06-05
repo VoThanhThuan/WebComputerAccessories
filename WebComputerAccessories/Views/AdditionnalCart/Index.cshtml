@@ -1,0 +1,52 @@
+﻿@model WebComputerAccessories.Models.Product
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="cart-wrapper row">
+    <div class="cart-left col-md-4">
+        <div class="cart-image">
+            <img src="https://anphat.com.vn/media/product/35089_10.png" alt="">
+        </div>
+    </div>
+    <div class="cart-right col-md-8">
+        <div class="cart-information">
+            <span class="cti-name">CARD MÀN HÌNH NVIDIA QUADRO P2200 (5GB GDDR5, 160 BIT, 4 DP) (GIGABYTE)</span>
+            <div class="bg-price">
+                <span>Đơn giá: </span>
+                <span class="cti-price">360.000₫</span>
+            </div>
+            <div class="bg-detail">
+                <span class="tt-detail">Mô tả: </span>
+                <span class="cti-detail">CARD MÀN HÌNH NVIDIA QUADRO P2200 (5GB GDDR5, 160 BIT, 4 DP) (GIGABYTE)</span>
+            </div>
+            <div class="bg-amount">
+                <div class="tt-amount">Số Lượng : </div>
+                <div class="input-gr">
+                    <span>
+                        <a href="" class="itoutline">
+                            <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="svg-icon "><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon></svg>
+                        </a>
+                    </span>
+                    <input type="text" class="input-amount itoutline" value="1" />
+                    <span>
+                        <a href="" class="itoutline">
+                            <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="svg-icon"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg>
+                        </a>
+                    </span>
+                </div>
+                <div class="tt-amount _sp">50000 sản phẩm có sẵn</div>
+            </div>
+            <a href="" class="add-cart mt-3">
+                <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0" class=" icon-add-to-cart"><g><g><polyline fill="none" points=".5 .5 2.7 .5 5.2 11 12.4 11 14.5 3.5 3.7 3.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polyline><circle cx="6" cy="13.5" r="1" stroke="none"></circle><circle cx="11.5" cy="13.5" r="1" stroke="none"></circle></g><line fill="none" stroke-linecap="round" stroke-miterlimit="10" x1="7.5" x2="10.5" y1="7" y2="7"></line><line fill="none" stroke-linecap="round" stroke-miterlimit="10" x1="9" x2="9" y1="8.5" y2="5.5"></line></g></svg>
+                <span>Thêm vào giỏ hàng</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Trở lại", "Index", "Home")
+</p>
