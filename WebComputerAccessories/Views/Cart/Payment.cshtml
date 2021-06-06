@@ -1,0 +1,18 @@
+﻿@model WebComputerAccessories.Models.ViewModel.OrderVM
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron text-center">
+    <h1 class="display-3">Cảm ơn bạn @Model.ShipName đã mua hàng!</h1>
+    <p class="lead"><strong>@Model.Note</strong> .</p>
+    <hr>
+    <p>
+        Tổng số tiền là @(Model.TotalMoney)
+    </p>
+    <p class="lead">
+        <a class="btn btn-primary btn-sm" href="/" role="button">Continue to homepage</a>
+    </p>
+</div>
+

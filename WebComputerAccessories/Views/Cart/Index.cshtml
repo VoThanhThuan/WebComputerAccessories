@@ -1,7 +1,7 @@
-﻿@model WebComputerAccessories.Models.Product
+﻿@model List<WebComputerAccessories.Models.ViewModel.DetailsCartVM>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Giỏ Hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,11 +10,11 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="container">
+    <div class="container">
 
-    <div class="card mt-3">
-        <h5 class="card-header">@ViewBag.Title</h5>
-        <div class="card-body">
+        <div class="card mt-3">
+            <h5 class="card-header">@ViewBag.Title</h5>
+            <div class="card-body">
 
                 <span>Giỏ hàng chưa có sản phẩm!</span>
 
@@ -27,52 +27,110 @@
                         <th width="10%">Số lượng</th>
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
-                        <th width="5%"></th>
                     </tr>
-
-                        <tr>
-                            <td>#</td>
-                            <td><img src="#" width="50" /></td>
-                            <td></td>
-                            <td>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><a href="#"><i class="fal fa-minus"></i></a></span>
-                                    </div>
-                                    <input type="text" class="form-control text-center" value="" readonly />
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><a href="#"><i class="fal fa-plus"></i></a></span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            @*<td class="text-center"><a href="@Url.Action("XoaKhoiGio", "GioHang", new { maSP = item.sach.ID })">Xóa</a></td>*@
-                        </tr>
-
+                    <tbody class="render">
+                    </tbody>
                     <tr>
                         <td colspan="5">Tổng thành tiền</td>
-                        <td class="text-right font-weight-bold text-primary">
-
-                        </td>
-                        <td></td>
+                        <td class="text-right font-weight-bold text-primary"></td>
                     </tr>
                 </table>
 
                 <p>
                     <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tiếp tục mua hàng</a>
-                    @*<a href="@Url.Action("ThanhToan", "Home")" class="btn btn-success">Thanh toán</a>*@
+                    <input type="submit" value="Thanh toán" href="/Cart/Payment" class="btn btn-success"/>
                 </p>
-            }
+                }
+            </div>
         </div>
-    </div>    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
     </div>
-</div>
 }
 
-
-
 @section Scripts {
+    <script>
+        $.ajax({
+            url: "/Cart/GetProductsJson",
+            context: document.body,
+            success: function(data) {
+                var render = () => {
+                    var index = 0;
+                    const products = data.map(x => {
+                        return `
+                                <tr>
+                                    <td>${++index}</td>
+                                    <td><img src="${x.Image}" width="50" /></td>
+                                    <td>${x.Name}</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <div id="minus" class="input-group-prepend" onClick="minus('${x.Id}', 'quantity_${x.IdProduct}')">
+                                                <span class="input-group-text"><a><i class="fal fa-minus"></i></a></span>
+                                            </div>
+                                            <input id="quantity_${x.IdProduct}" type="text" class="form-control text-center" value="${x.Quantity}" readonly />
+                                            <input id="stock__${x.IdProduct}" type="text" value="${x.Stock}" hidden />
+                                            <div id="plus" class="input-group-append" onClick="plus('${x.Id}' ,'quantity_${x.IdProduct}')">
+                                                <span class="input-group-text"><a><i class="fal fa-plus"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">${x.Price}</td>
+                                    <td>${x.Quantity * x.Price}</td>
+                                </tr>
+                        `;
+                    });
+
+                    $$('.render').innerHTML = products.join('');
+                };
+                render();
+            },
+            error: function(error) {
+                console.log("Error:");
+                console.log(error);
+            }
+        }).done(function() {
+            $(this).addClass("done");
+
+        });
+
+        function plus(id, quantity) {
+            console.log("Tăng số lượng");
+            $.ajax({
+                type: "POST",
+                url: "/Cart/UpdateIncrease?id=" + id,
+                success: function () {
+                    console.log('id số lượng' + quantity);
+                    let q = document.getElementById(quantity);
+                    q.value++;
+                },
+                error:
+                    function (error) {
+                        console.log("Error:");
+                        console.log(error);
+                    }
+            });
+        }
+
+        function minus(id, quantity) {
+            console.log("Giảm số lượng");
+            $.ajax({
+                type: "POST",
+                url: "/Cart/UpdateDecrease?id=" + id,
+                success: function(result) {
+                    let q = document.getElementById(quantity);
+                    q.value--;
+                },
+                error:
+                    function (error) {
+                        console.log("Error:");
+                        console.log(error);
+                    }
+            });
+
+        }
+
+
+    </script>
+
 }
