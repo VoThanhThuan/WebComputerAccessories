@@ -45,7 +45,7 @@ namespace WebComputerAccessories.Controllers
 
         public ActionResult SignOut()
         {
-            // Đăng ký SESSION
+            // Hủy ký SESSION
             Session.Clear();
             return RedirectToAction("Index", "Home");
         }

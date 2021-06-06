@@ -163,6 +163,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ViewModel\AppUserVM.cs" />
+    <Compile Include="Models\ViewModel\CartVM.cs" />
     <Compile Include="Models\ViewModel\DataJson.cs" />
     <Compile Include="Models\ViewModel\DetailsCartVM.cs" />
     <Compile Include="Models\ViewModel\LoginRequest.cs" />

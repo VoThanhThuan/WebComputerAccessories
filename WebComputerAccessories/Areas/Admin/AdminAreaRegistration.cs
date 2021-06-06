@@ -17,7 +17,7 @@ namespace WebComputerAccessories.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { Controller="Home", action = "Index", id = UrlParameter.Optional },
+                new { Areas="Admin", Controller="Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new [] { "WebComputerAccessories.Areas.Admin.Controllers" }
             );
         }

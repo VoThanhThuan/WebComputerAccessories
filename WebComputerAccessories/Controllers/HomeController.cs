@@ -20,10 +20,11 @@ namespace WebComputerAccessories.Controllers
             var json = JsonConvert.SerializeObject(new Product().ConvertListVM(proct));
             return View(new DataJson() { Data = json });
         }
-
-        public ContentResult GetProductsJson()
+        [HttpPost]
+        [Route("/GetProductsJson/{skip=skip}/{take=take}")]
+        public ContentResult GetProductsJson(int skip, int take)
         {
-            var proct = db.Products.Select(x => x).ToList();
+            var proct = db.Products.OrderByDescending(x => x.DateCreated).Skip(skip).Take(take).ToList();
             var json = JsonConvert.SerializeObject(new Product().ConvertListVM(proct));
             return Content(json, "application/json");
         }

@@ -1,4 +1,4 @@
-﻿@model List<WebComputerAccessories.Models.ViewModel.DetailsCartVM>
+﻿@model WebComputerAccessories.Models.ViewModel.CartVM
 
 @{
     ViewBag.Title = "Giỏ Hàng";
@@ -6,7 +6,7 @@
 }
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Payment","Cart", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -20,6 +20,7 @@
 
 
                 <table class="table table-bordered table-hover table-sm">
+                    <thead>
                     <tr>
                         <th width="5%">#</th>
                         <th>Hình ảnh</th>
@@ -27,7 +28,10 @@
                         <th width="10%">Số lượng</th>
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
+                        <th>#</th>
                     </tr>
+
+                    </thead>
                     <tbody class="render">
                     </tbody>
                     <tr>
@@ -40,7 +44,6 @@
                     <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tiếp tục mua hàng</a>
                     <input type="submit" value="Thanh toán" href="/Cart/Payment" class="btn btn-success"/>
                 </p>
-                }
             </div>
         </div>
         <div>
@@ -53,13 +56,14 @@
     <script>
         $.ajax({
             url: "/Cart/GetProductsJson",
+            type: "POST",
             context: document.body,
             success: function(data) {
                 var render = () => {
                     var index = 0;
-                    const products = data.map(x => {
+                    const products = data.Details.map(x => {
                         return `
-                                <tr>
+                                <tr id="row_${x.IdProduct}">
                                     <td>${++index}</td>
                                     <td><img src="${x.Image}" width="50" /></td>
                                     <td>${x.Name}</td>
@@ -77,6 +81,7 @@
                                     </td>
                                     <td class="text-right">${x.Price}</td>
                                     <td>${x.Quantity * x.Price}</td>
+                                    <td> <div id="remove_${x.IdProduct}" onClick="remove('${x.IdProduct}')"><a class="badge rounded-pill bg-danger"><i class="fad fa-trash"></i> Delete </a></div> </td>
                                 </tr>
                         `;
                     });
@@ -99,13 +104,13 @@
             $.ajax({
                 type: "POST",
                 url: "/Cart/UpdateIncrease?id=" + id,
-                success: function () {
+                success: function() {
                     console.log('id số lượng' + quantity);
                     let q = document.getElementById(quantity);
                     q.value++;
                 },
                 error:
-                    function (error) {
+                    function(error) {
                         console.log("Error:");
                         console.log(error);
                     }
@@ -122,7 +127,7 @@
                     q.value--;
                 },
                 error:
-                    function (error) {
+                    function(error) {
                         console.log("Error:");
                         console.log(error);
                     }
@@ -130,6 +135,23 @@
 
         }
 
+        function remove(id) {
+            console.log("Xóa sản phẩm");
+            $.ajax({
+                type: "POST",
+                url: "/Cart/Remove?id=" + id,
+                success: function(result) {
+                    let q = document.getElementById('row_'+id);
+                    q.remove();
+                },
+                error:
+                    function(error) {
+                        console.log("Error:");
+                        console.log(error);
+                    }
+            });
+
+        }
 
     </script>
 

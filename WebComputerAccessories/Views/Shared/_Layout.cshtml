@@ -22,12 +22,12 @@
     <div class="nav-wrapper">
         <div class="container">
             <div class="nav">
-                <a href="#" class="logo">
+                <a href="/" class="logo">
                     <img src="" alt="">
                     &nbsp;<span class="shop-name">Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span></span>
                 </a>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#"><svg viewBox="0 0 26.6 25.6"><polyline fill="none" points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5"></polyline><circle cx="10.7" cy="23" r="2.2" stroke="none"></circle><circle cx="19.7" cy="23" r="2.2" stroke="none"></circle></svg>&nbsp;Giỏ Hàng</a></li>
+                    <li><a href="/Cart"><svg viewBox="0 0 26.6 25.6"><polyline fill="none" points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5"></polyline><circle cx="10.7" cy="23" r="2.2" stroke="none"></circle><circle cx="19.7" cy="23" r="2.2" stroke="none"></circle></svg>&nbsp;Giỏ Hàng</a></li>
                     <li>
                         <form class="form-search">
                             <div class="search">
@@ -38,9 +38,19 @@
                     </li>
 
                     <li>
-                        <a href="#" class="_btn btn-hover">
-                            <span>Sign in</span>
-                        </a>
+                        @if (Session["MaNguoiDung"] == null)
+                        {
+                            <a href="/Login" class="_btn btn-hover">
+                                <span>Sign in</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Login/SignOut" class="_btn btn-hover">
+                                <span>Sign out</span>
+                            </a>
+                        }
+
                     </li>
                 </ul>
                 <!-- MOBILE MENU TOGGLE -->

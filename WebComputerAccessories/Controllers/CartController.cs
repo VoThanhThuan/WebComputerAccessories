@@ -17,20 +17,23 @@ namespace WebComputerAccessories.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            if(Session["MaNguoiDung"] == null)
+            if (Session["MaNguoiDung"] == null)
                 return RedirectToAction("Index", "Home");
             return View();
         }
 
+        [HttpPost]
         public ContentResult GetProductsJson()
         {
             var idUser = (Guid)Session["MaNguoiDung"];
 
-            var details = (from c in db.Carts
-                join dt in db.CartDetails on c.Id equals dt.IdCart
-                join p in db.Products on dt.IdProduct equals p.Id
-                where c.IdUser == idUser
-                select new { p, dt }).ToList();
+            var userCart = db.Carts.FirstOrDefault(x => x.IdUser == idUser);
+
+            var details = (from dt in db.CartDetails
+                           join p in db.Products on dt.IdProduct equals p.Id
+                           where dt.IdCart == userCart.Id
+                           select new {p, dt }).ToList();
+
             var prod = (details.Select(item => new DetailsCartVM()
             {
                 Id = item.dt.Id,
@@ -45,9 +48,15 @@ namespace WebComputerAccessories.Controllers
                 IdCategory = item.p.IdCategory
             })).ToList();
 
-            Session["cart"] = prod;
+            var cart = new CartVM()
+            {
+                IdCart = userCart?.Id ?? Guid.Empty,
+                Details = prod
+            };
 
-            var json = JsonConvert.SerializeObject(prod);
+            Session["cart"] = cart;
+
+            var json = JsonConvert.SerializeObject(cart);
             return Content(json, "application/json");
         }
 
@@ -82,18 +91,28 @@ namespace WebComputerAccessories.Controllers
                 idCart = cart.Id;
             }
 
-            var deltail = new CartDetail()
+            var productInCart = db.CartDetails.FirstOrDefault(x => x.IdCart == idCart && x.IdProduct == id);
+            if (productInCart == null)
             {
-                Id = Guid.NewGuid(),
-                Quantity = quantity,
-                Price = product.Price * quantity,
-                IdCart = idCart,
-                IdProduct = product.Id
-            };
-            //db.Entry(product).State = EntityState.Modified;
-            //product.Stock -= quantity;
-            db.CartDetails.Add(deltail);
+                var deltail = new CartDetail()
+                {
+                    Id = Guid.NewGuid(),
+                    Quantity = quantity,
+                    Price = product.Price * quantity,
+                    IdCart = idCart,
+                    IdProduct = product.Id
+                };
+                //db.Entry(product).State = EntityState.Modified;
+                //product.Stock -= quantity;
+                db.CartDetails.Add(deltail);
+            }
+            else
+            {
+                db.Entry(productInCart).State = EntityState.Modified;
+                productInCart.Quantity += quantity;
+            }
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -120,7 +139,7 @@ namespace WebComputerAccessories.Controllers
             var products = (List<DetailsCartVM>)Session["cart"];
             var product = products.FirstOrDefault(x => x.Id == id);
 
-            if (product.Quantity < 1 )
+            if (product.Quantity < 1)
                 return new HttpStatusCodeResult(400);
 
             product.Quantity++;
@@ -130,11 +149,29 @@ namespace WebComputerAccessories.Controllers
         }
 
         [HttpPost]
-        public ActionResult Payment()
+        [Route("/Remove/{id=id}")]
+        public ActionResult Remove(Guid id)
         {
             var products = (List<DetailsCartVM>)Session["cart"];
+            var product = products.FirstOrDefault(x => x.Id == id);
 
-            var idUser = (string)Session["MaNguoiDung"];
+            products.Remove(product);
+
+            var detail = db.CartDetails.FirstOrDefault(x => x.IdProduct == id);
+            db.CartDetails.Remove(detail);
+
+            db.SaveChanges();
+
+            Session["cart"] = products;
+            return new HttpStatusCodeResult(200);
+        }
+
+        [HttpPost]
+        public ActionResult Payment()
+        {
+            var cart = (CartVM)Session["cart"];
+
+            var idUser = (Guid)Session["MaNguoiDung"];
 
             var user = db.AppUsers.Find(idUser);
 
@@ -149,7 +186,7 @@ namespace WebComputerAccessories.Controllers
             };
             db.Orders.Add(order);
             var totalMoney = 0d;
-            foreach (var item in products)
+            foreach (var item in cart.Details)
             {
                 var odt = new OrderDetail()
                 {
@@ -161,11 +198,17 @@ namespace WebComputerAccessories.Controllers
                 };
                 totalMoney += Convert.ToDouble(item.Quantity * item.Price);
                 var product = db.Products.Find(item.IdProduct);
-                db.Entry(products).State = EntityState.Modified;
+                db.Entry(product).State = EntityState.Modified;
                 product.Stock -= item.Quantity;
                 db.OrderDetails.Add(odt);
                 db.SaveChanges();
             }
+
+            Session["Cart"] = null;
+
+            var details = db.CartDetails.Where(x => x.IdCart == cart.IdCart).ToList();
+            db.CartDetails.RemoveRange(details);
+            db.SaveChanges();
 
             var orderVM = new OrderVM()
             {
