@@ -21,7 +21,7 @@ namespace WebComputerAccessories.Controllers
             return View(new DataJson() { Data = json });
         }
 
-        public ContentResult GetProducts()
+        public ContentResult GetProductsJson()
         {
             var proct = db.Products.Select(x => x).ToList();
             var json = JsonConvert.SerializeObject(new Product().ConvertListVM(proct));

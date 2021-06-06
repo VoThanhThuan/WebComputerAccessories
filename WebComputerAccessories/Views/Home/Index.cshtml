@@ -3,18 +3,20 @@
     ViewBag.Title = "Trang Chủ";
 }
 
-<div class="render row"></div>
+<div class="container"><div class="render row"></div></div>
+
 
 @section Scripts {
     <script>
-        /*<div>${(new Date(x.DateCreated)).toLocaleDateString()}</div>*/
-        var data = @Html.Raw(Model.Data);
-       
-        var render = () => {
-            const products = data.map(x => {
-                return `
+        $.ajax({
+            url: "/Home/GetProductsJson",
+            context: document.body,
+            success: function(data){
+                var render = () => {
+                    const products = data.map(x => {
+                        return `
                      <div class="card-wrapper col-lg-3 col-md-4 col-sm-5 col-12 tlt mt-3">
-                        <a href="">
+                        <a href="/Detail?id=${x.Id}">
                             <div class="card-product">
                                 <div class="pd-img">
                                     <img class="img-product" src="${x.Image}" alt="">
@@ -27,11 +29,19 @@
                         </a>
                     </div>
                 `;
-            });
+                    });
 
-            $$('.render').innerHTML = products.join('');
-        };
-        render();
+                    $$('.render').innerHTML = products.join('');
+                };
+                render();
+            },
+            error: function(error){
+                console.log("Error:");
+                console.log(error);
+            }
+        }).done(function() {
+            $(this).addClass("done");
 
+        });
     </script>
 }
