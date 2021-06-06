@@ -15,19 +15,21 @@
                 var render = () => {
                     const products = data.map(x => {
                         return `
-                     <div class="card-wrapper col-lg-3 col-md-4 col-sm-5 col-12 tlt mt-3">
-                        <a href="/Detail?id=${x.Id}">
-                            <div class="card-product">
-                                <div class="pd-img">
-                                    <img class="img-product" src="${x.Image}" alt="">
+              
+                         <div class="card-wrapper col-lg-3 col-md-4 col-sm-5 col-12 tlt mt-3  wow bounceInUp " data-wow-delay="0.7s">
+                            <a href="/Detail?id=${x.Id}">
+                                <div class="card-product">
+                                    <div class="pd-img">
+                                        <img class="img-product" src="${x.Image}" alt="">
+                                    </div>
+                                    <div class="infor">
+                                        <div class="name">${x.Name}</div>
+                                        <strong class="price">${(new Intl.NumberFormat('de-DE').format(x.Price))}₫</strong>
+                                    </div>
                                 </div>
-                                <div class="infor">
-                                    <div class="name">${x.Name}</div>
-                                    <strong class="price">${(new Intl.NumberFormat('de-DE').format(x.Price))}₫</strong>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    
                 `;
                     });
 
@@ -43,5 +45,7 @@
             $(this).addClass("done");
 
         });
+
+       
     </script>
 }

@@ -13,8 +13,11 @@
     <!--BOOTSTRAPS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!--LESS-->
-    <link rel="stylesheet/less" href="~/Content/app.less">
-    <link rel="stylesheet/less" href="~/Content/base.less">
+    <link rel="stylesheet/less" href="/Content/app.less">
+    <link rel="stylesheet/less" href="/Content/base.less">
+    <!--WOW-->
+    <link rel="stylesheet/less" href="/Content/wowjs/animate.css">
+    
     @RenderSection("css", required: false)
 </head>
 <body>
@@ -139,12 +142,20 @@
 
 
 </body>
+<script src="/Content/wowjs/wow.min.js"></script>
+<script>
+    new WOW().init();
+</script>
 
 <!-- JQUERY -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <!--LESS JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/4.1.1/less.min.js" integrity="sha512-mE4RWRhILuNDWPx8sl5Q739XNbibSUZP9dEjdepzpYVw1kDco9ZZ5l/+KHAMffzXNHnmSWexMSN+OX137tNL5A==" crossorigin="anonymous"></script>
+<script src="/Content/less.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/4.1.1/less.min.js" integrity="sha512-mE4RWRhILuNDWPx8sl5Q739XNbibSUZP9dEjdepzpYVw1kDco9ZZ5l/+KHAMffzXNHnmSWexMSN+OX137tNL5A==" crossorigin="anonymous"></script>-->
 <script src="/Content/app.js"></script>
+
+
 @RenderSection("scripts", required: false)
 </html>
 

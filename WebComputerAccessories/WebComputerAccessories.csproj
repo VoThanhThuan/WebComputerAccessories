@@ -175,8 +175,11 @@
     <Content Include="Content\app.js" />
     <Content Include="Content\images\app-store.png" />
     <Content Include="Content\images\google-play.png" />
+    <Content Include="Content\less.js" />
     <Content Include="Content\LoginHome\img\Mobile login-rafiki.svg" />
     <Content Include="Content\svg.css" />
+    <Content Include="Content\wowjs\animate.css" />
+    <Content Include="Content\wowjs\wow.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
