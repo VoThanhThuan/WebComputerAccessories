@@ -146,10 +146,12 @@
     <Compile Include="Areas\Admin\Service\AppUserService.cs" />
     <Compile Include="Areas\Admin\Service\ImageService.cs" />
     <Compile Include="Areas\Admin\Service\ProductService.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NotFoundController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -162,7 +164,9 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ViewModel\AppUserVM.cs" />
     <Compile Include="Models\ViewModel\DataJson.cs" />
+    <Compile Include="Models\ViewModel\DetailsCartVM.cs" />
     <Compile Include="Models\ViewModel\LoginRequest.cs" />
+    <Compile Include="Models\ViewModel\OrderVM.cs" />
     <Compile Include="Models\ViewModel\ProductVM.cs" />
     <Compile Include="Models\WebAccessoriesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -224,8 +228,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
@@ -250,6 +252,8 @@
     <Content Include="Views\Detail\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Cart\Payment.cshtml" />
+    <Content Include="Views\NotFound\index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
