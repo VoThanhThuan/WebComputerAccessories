@@ -5,11 +5,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>AppUser</h4>
-    <hr />
+    
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Username)
@@ -77,7 +75,9 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="btn btn-primary mb-2">
+    @Html.ActionLink("Chỉnh Sửa", "Edit", new { id = Model.Id })
+</div>
+<div>
+    @Html.ActionLink("Quay Lại", "Index")
+</div>

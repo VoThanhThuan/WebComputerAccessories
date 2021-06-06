@@ -175,6 +175,7 @@
     <Content Include="Content\app.js" />
     <Content Include="Content\images\app-store.png" />
     <Content Include="Content\images\google-play.png" />
+    <Content Include="Content\LoginHome\img\Mobile login-rafiki.svg" />
     <Content Include="Content\svg.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -218,6 +219,10 @@
     <Content Include="Content\base.less" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Libs\FluentResult.dll" />
+    <Content Include="Content\LoginHome\app.js" />
+    <Content Include="Content\LoginHome\img\log.svg" />
+    <Content Include="Content\LoginHome\img\register.svg" />
+    <Content Include="Content\LoginHome\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
