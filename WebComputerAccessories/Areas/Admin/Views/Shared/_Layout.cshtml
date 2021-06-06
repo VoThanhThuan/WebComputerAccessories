@@ -17,63 +17,65 @@
     @RenderSection("css", required: false)
 </head>
 <body>
-<div class="nav-wrapper" style="background-color: blueviolet">
-    <div class="container">
-        <div class="nav">
-            <a href="/Admin" class="logo">
-                <!-- <i class='bx bx-book-bookmark bx-tada'></i><span> -->
-                <img src="" alt="">
-                &nbsp;<span class="shop-name"><i class='bx bx-movie-play bx-tada main-color'></i>Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span> </span>
+    <div class="nav-wrapper" style="background-color: blueviolet">
+        <div class="container">
+            <div class="nav">
+                <a href="/Admin" class="logo">
+                    <!-- <i class='bx bx-book-bookmark bx-tada'></i><span> -->
+                    <img src="" alt="">
+                    &nbsp;<span class="shop-name"><i class='bx bx-movie-play bx-tada main-color'></i>Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span> </span>
 
-            </a>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="/admin/appusers">Người Dùng</a></li>
-                <li><a href="/admin/categories">Loại Hàng</a></li>
-                <li><a href="/admin/orders">Đặt Hàng</a></li>
-                <li><a href="/admin/products">Sản Phẩm</a></li>
-                <li>
-                    <form class="form-search">
-                        <div class="search">
-                            <input type="text" placeholder="Nhập tên truyện...">
-                            <span><i class="fas fa-search"></i></span>
-                        </div>
-                    </form>
-                </li>
+                </a>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="/admin/appusers">Người Dùng</a></li>
+                    <li><a href="/admin/categories">Loại Hàng</a></li>
+                    <li><a href="/admin/orders">Đặt Hàng</a></li>
+                    <li><a href="/admin/products">Sản Phẩm</a></li>
+                    <li>
+                        <form class="form-search">
+                            <div class="search">
+                                <input type="text" placeholder="Nhập tên truyện...">
+                                <span><i class="fas fa-search"></i></span>
+                            </div>
+                        </form>
+                    </li>
 
-                <li>
-                    @if (Session["MaNguoiDung"] == null)
-                    {
-                        <a href="/Admin/Login" class="_btn btn-hover">
-                            <span>Sign in</span>
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="/Admin/Login/SignOut" class="_btn btn-hover">
-                            <span>Sign out</span>
-                        </a>
+                    <li>
+                        @if (Session["MaNguoiDung"] == null)
+                        {
+                            <a href="/Admin/Login" class="_btn btn-hover">
+                                <span>Sign in</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Admin/Login/SignOut" class="_btn btn-hover">
+                                <span>Sign out</span>
+                            </a>
 
-                    }
+                        }
 
-                </li>
-            </ul>
-            <!-- MOBILE MENU TOGGLE -->
-            <div class="hamburger-menu" id="hamburger-menu">
-                <div class="hamburger"></div>
+                    </li>
+                </ul>
+                <!-- MOBILE MENU TOGGLE -->
+                <div class="hamburger-menu" id="hamburger-menu">
+                    <div class="hamburger"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div style="margin-top: 80px" class="container">
-    @RenderBody()
-</div>
-<a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
+    <div style="margin-top: 80px" class="container">
+        @RenderBody()
+    </div>
+    <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
 </body>
 <!-- JQUERY -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!--LESS JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/4.1.1/less.min.js" integrity="sha512-mE4RWRhILuNDWPx8sl5Q739XNbibSUZP9dEjdepzpYVw1kDco9ZZ5l/+KHAMffzXNHnmSWexMSN+OX137tNL5A==" crossorigin="anonymous"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/4.1.1/less.min.js" integrity="sha512-mE4RWRhILuNDWPx8sl5Q739XNbibSUZP9dEjdepzpYVw1kDco9ZZ5l/+KHAMffzXNHnmSWexMSN+OX137tNL5A==" crossorigin="anonymous"></script>-->
+<script src="/Content/less.js"></script>
 <script src="/Content/app.js"></script>
+
 @RenderSection("scripts", required: false)
 </html>
 

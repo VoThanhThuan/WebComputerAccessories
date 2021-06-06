@@ -13,14 +13,14 @@
         <input id="stock" type="text" value="@Model.Stock" hidden />
     </div>
     <div class="container">
-        <div class="cart-wrapper row">
-            <div class="cart-left col-md-4">
+        <div class="cart-wrapper row " >
+            <div class="cart-left col-md-4 wow bounceInUp" data-wow-delay="1s">
                 <div class="cart-image">
                     <img src="@Model.Image" alt="">
                 </div>
             </div>
-            <div class="cart-right col-md-8">
-                <div class="cart-information">
+            <div class="cart-right col-md-8 wow bounceInRight" data-wow-delay="1s">
+                <div class="cart-information" >
                     <span class="cti-name">@Model.Name</span>
                     <div class="bg-price">
                         <span>Đơn giá: </span>
