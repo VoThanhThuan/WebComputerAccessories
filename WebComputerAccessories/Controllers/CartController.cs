@@ -30,14 +30,15 @@ namespace WebComputerAccessories.Controllers
                return RedirectToAction("Index", "Home");
 
            var idCart = Guid.Empty;
-           var cart = db.Carts.FirstOrDefault(x => x.IdUser == (Guid) Session["MaNguoiDung"]);
+           var idUser = (Guid) Session["MaNguoiDung"];
+           var cart = db.Carts.FirstOrDefault(x => x.IdUser == idUser);
            if (cart == null)
            {
                idCart = new Guid();
                var c = new Cart()
                {
                    Id = idCart,
-                   IdUser = (Guid)Session["MaNguoiDung"]
+                   IdUser = idUser
                };
                db.Carts.Add(c);
                db.SaveChanges();

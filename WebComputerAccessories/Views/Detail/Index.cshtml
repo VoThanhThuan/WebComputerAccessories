@@ -4,10 +4,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "addProductIntoCart" }))
+@using (Html.BeginForm("Add", "Cart", FormMethod.Post, new { id = "addProductIntoCart" }))
 {
     @Html.AntiForgeryToken()
-    <input Name="id" type="text" value="@Model.Id" hidde/>
+    <input Name="id" type="text" value="@Model.Id" height="" />
+    <input id="stock" type="text" value="@Model.Stock" hidden="" />
     <div class="container">
         <div class="cart-wrapper row">
             <div class="cart-left col-md-4">
@@ -65,12 +66,13 @@
             }
             $$('.input-amount').onkeypress = inputOnlyNumber;
 
-            document.getElementById("submit").onclick = function() {
-                document.getElementById("addProductIntoCart").submit();
+            submit.onclick = function () {
+                addProductIntoCart.submit();
             }
 
             plus.onclick = () => {
-                quantity.value++;
+                if (quantity.value < stock.value)
+                    quantity.value++;
             }
 
             minus.onclick = () => {
