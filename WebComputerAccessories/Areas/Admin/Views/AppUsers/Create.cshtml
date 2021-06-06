@@ -5,7 +5,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
 
 
 @using (Html.BeginForm("Create", "AppUsers", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -15,8 +14,8 @@
     <div class="container rounded bg-white mt-5 mb-5">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="row justify-content-md-center">
-            <div class="col-md-3 border-right">
+        <div class="row ">
+            <div class="col-md-4 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img id="avatarPreview" class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
                     <span class="font-weight-bold">Ảnh Đại Diện</span>
@@ -30,7 +29,7 @@
                     <span> </span>
                 </div>
             </div>
-            <div class="col-md-5 border-right">
+            <div class="col-md-8 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Thêm Người Dùng Mới</h4>
@@ -95,9 +94,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5 text-center">
-                        <input type="submit" value="Create" class="btn btn-primary" />
-                    </div>
+
+                        <div class="mt-5 text-center">
+                            <input type="submit" value="Thêm Người Dùng" class="btn btn-primary" />
+                        </div>
+      
                 </div>
             </div>
         </div>
@@ -106,7 +107,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Quay Lại", "Index")
 </div>
 
 @section Scripts {

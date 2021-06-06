@@ -23,7 +23,8 @@
             <a href="/Admin" class="logo">
                 <!-- <i class='bx bx-book-bookmark bx-tada'></i><span> -->
                 <img src="" alt="">
-                &nbsp;<i class='bx bx-movie-play bx-tada main-color'></i>Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span>
+                &nbsp;<span class="shop-name"><i class='bx bx-movie-play bx-tada main-color'></i>Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span> </span>
+
             </a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="/admin/appusers">Người Dùng</a></li>
@@ -42,13 +43,13 @@
                 <li>
                     @if (Session["MaNguoiDung"] == null)
                     {
-                        <a href="/Admin/Login" class="btn btn-hover">
+                        <a href="/Admin/Login" class="_btn btn-hover">
                             <span>Sign in</span>
                         </a>
                     }
                     else
                     {
-                        <a href="/Admin/Login/SignOut" class="btn btn-hover">
+                        <a href="/Admin/Login/SignOut" class="_btn btn-hover">
                             <span>Sign out</span>
                         </a>
 
@@ -63,7 +64,7 @@
         </div>
     </div>
 </div>
-<div style="margin-top: 20px" class="container">
+<div style="margin-top: 80px" class="container">
     @RenderBody()
 </div>
 <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
