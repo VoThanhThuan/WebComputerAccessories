@@ -30,6 +30,10 @@
                 type: "POST",
                 context: document.body,
                 success: function(data) {
+                    console.log(data);
+                    if (data.length === 0) {
+                        loadMore.remove();
+                    }
                     var render = () => {
                         const products = data.map(x => {
                             return `
@@ -37,7 +41,7 @@
                         <a href="/Detail?id=${x.Id}">
                             <div class="card-product">
                                 <div class="pd-img">
-                                    <img class="img-product" src="${x.Image}" alt="">
+                                    <img class="img-product" id="img" src="${x.Image}" alt="">
                                 </div>
                                 <div class="infor">
                                     <div class="name">${x.Name}</div>
@@ -60,12 +64,12 @@
 
 
             });
-            
+
 
         }
 
         loadProduct();
-       
+
 
         loadMore.onclick = () => {
             console.log("Tải thêm");
