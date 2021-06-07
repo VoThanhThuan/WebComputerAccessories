@@ -22,7 +22,7 @@
             <div class="nav">
                 <a href="/Admin" class="logo">
                     <!-- <i class='bx bx-book-bookmark bx-tada'></i><span> -->
-                    <img src="" alt="">
+                    <img src="/Content/logo.png" alt="">
                     &nbsp;<span class="shop-name"><i class='bx bx-movie-play bx-tada main-color'></i>Bá<span class="main-color">n</span>h<span class="main-color">Ú</span><span class="tv">Shop</span> </span>
 
                 </a>
@@ -41,7 +41,7 @@
                     </li>
 
                     <li>
-                        @if (Session["MaNguoiDung"] == null)
+                        @if (Session["MaNguoiDung"] == null || (bool)Session["Quyen"] == false)
                         {
                             <a href="/Admin/Login" class="_btn btn-hover">
                                 <span>Sign in</span>

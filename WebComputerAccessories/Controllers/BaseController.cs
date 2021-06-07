@@ -11,8 +11,9 @@ namespace WebComputerAccessories.Controllers
         // GET: Base
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (Session["MaNguoiDung"] == null)
+            if (Session["MaNguoiDung"] == null || (bool)Session["Quyen"] == true)
             {
+                Session.Clear();
                 filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { action = "Index", controller = "Login" }));
             }
 
