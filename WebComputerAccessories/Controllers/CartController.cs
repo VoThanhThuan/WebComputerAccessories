@@ -121,8 +121,8 @@ namespace WebComputerAccessories.Controllers
         [Route("/UpdateIncrease/{id=id}")]
         public ActionResult UpdateIncrease(Guid id)
         {
-            var products = (List<DetailsCartVM>)Session["cart"];
-            var product = products.FirstOrDefault(x => x.Id == id);
+            var products = (CartVM)Session["cart"];
+            var product = products.Details.FirstOrDefault(x => x.Id == id);
 
             if (product.Quantity > product.Stock)
                 return new HttpStatusCodeResult(400);
@@ -137,13 +137,13 @@ namespace WebComputerAccessories.Controllers
         [Route("/UpdateDecrease/{id=id}")]
         public ActionResult UpdateDecrease(Guid id)
         {
-            var products = (List<DetailsCartVM>)Session["cart"];
-            var product = products.FirstOrDefault(x => x.Id == id);
+            var products = (CartVM)Session["cart"];
+            var product = products.Details.FirstOrDefault(x => x.Id == id);
 
             if (product.Quantity < 1)
                 return new HttpStatusCodeResult(400);
 
-            product.Quantity++;
+            product.Quantity--;
 
             Session["cart"] = products;
             return new HttpStatusCodeResult(200);
@@ -153,10 +153,10 @@ namespace WebComputerAccessories.Controllers
         [Route("/Remove/{id=id}")]
         public ActionResult Remove(Guid id)
         {
-            var products = (List<DetailsCartVM>)Session["cart"];
-            var product = products.FirstOrDefault(x => x.Id == id);
+            var products = (CartVM)Session["cart"];
+            var product = products.Details.FirstOrDefault(x => x.Id == id);
 
-            products.Remove(product);
+            products.Details.Remove(product);
 
             var detail = db.CartDetails.FirstOrDefault(x => x.IdProduct == id);
             db.CartDetails.Remove(detail);
@@ -180,6 +180,7 @@ namespace WebComputerAccessories.Controllers
             var order = new Order()
             {
                 Id = idOrder,
+                IdUser = user.Id,
                 ShipName = $"{user.Lastname} {user.Firstname}",
                 ShipAddress = "Đồ án demo không có địa chỉ",
                 ShipPhoneNumber = user.PhoneNumber,
