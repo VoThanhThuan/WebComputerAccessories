@@ -20,7 +20,11 @@
     @RenderSection("css", required: false)
 </head>
 <body>
-
+<div class="body-loader" id="body-loader">
+    <div class="loader">
+        <h2>Loading...</h2>
+    </div>
+</div>
     <div class="nav-wrapper">
         <div class="container">
             <div class="nav">
@@ -154,6 +158,10 @@
 <script src="/Content/wowjs/wow.min.js"></script>
 <script>
     new WOW().init();
+    var loading = document.getElementById('body-loader')
+    setTimeout(() => {
+        loading.remove();
+    }, 10 * 1000);
 </script>
 
 <!-- JQUERY -->
