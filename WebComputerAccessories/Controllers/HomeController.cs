@@ -25,6 +25,11 @@ namespace WebComputerAccessories.Controllers
         public ContentResult GetProductsJson(int skip, int take)
         {
             var proct = db.Products.OrderByDescending(x => x.DateCreated).Skip(skip).Take(take).ToList();
+            proct.ForEach(x =>
+            {
+                if (x.Image == null)
+                    x.Image = "https://cf.shopee.vn/file/4d200f5e0fa60b39c1d978ae4a76f50b_tn";
+            });
             var json = JsonConvert.SerializeObject(new Product().ConvertListVM(proct));
             return Content(json, "application/json");
         }

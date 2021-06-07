@@ -19,7 +19,7 @@
     <!--AutoComplete-->
     @RenderSection("css", required: false)
 </head>
-<body>
+<body id="ovf">
 <div class="body-loader" id="body-loader">
     <div class="loader">
         <h2>Loading...</h2>
@@ -164,8 +164,11 @@
 <script src="/Content/wowjs/wow.min.js"></script>
 <script>
     new WOW().init();
-    var loading = document.getElementById('body-loader')
+    var loading = document.getElementById('body-loader');
+    var over = document.getElementById('ovf')
+    over.style.overflowY = "hidden";
     setTimeout(() => {
+        over.style.overflowY = "scroll";
         loading.remove();
     }, 10 * 1000);
 </script>
