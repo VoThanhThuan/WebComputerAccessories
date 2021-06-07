@@ -31,11 +31,12 @@
                 <ul class="nav-menu" id="nav-menu">
                     <li><a href="/Cart"><svg viewBox="0 0 26.6 25.6"><polyline fill="none" points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5"></polyline><circle cx="10.7" cy="23" r="2.2" stroke="none"></circle><circle cx="19.7" cy="23" r="2.2" stroke="none"></circle></svg>&nbsp;Giỏ Hàng</a></li>
                     <li>
-                        <form class="form-search">
+                        <div class="form-search">
                             <div class="search">
-                                <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" placeholder="Tìm kiếm...">
+                                <input id="search" type="search" placeholder="Tìm kiếm...">
+                                <span><i class="fas fa-search"></i></span>
                             </div>
-                        </form>
+                        </div>
                     </li>
 
                     <li>
@@ -162,33 +163,52 @@
 <script src="/Content/less.js"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/4.1.1/less.min.js" integrity="sha512-mE4RWRhILuNDWPx8sl5Q739XNbibSUZP9dEjdepzpYVw1kDco9ZZ5l/+KHAMffzXNHnmSWexMSN+OX137tNL5A==" crossorigin="anonymous"></script>-->
 <script src="/Content/app.js"></script>
-<!--AutoComplete-->
+
 <script>
-        var loadSearch= () => {
+    var input = document.getElementById("search");
+    input.addEventListener("keyup", function (event) {
+        console.log(event.keyCode);
+        if (event.keyCode === 13) {
+            event.preventDefault();
             $.ajax({
-                url: "/Home/GetProductsJson?skip=0&take=60",
+                url: "/Home/Search?skip=0&take=10&keyword=" + input.value,
                 type: "POST",
                 context: document.body,
-                success: function (data) {
-                    var source = data.map(x => { return x.Name });
-                    console.log(source);
+                success: function(data) {
                     var render = () => {
-                        // autoComplete.js Config Options
-                        $("#tags").autocomplete({
-                            source: availableTags
+                        const products = data.map(x => {
+                            return `
+                     <div class="card-wrapper col-lg-3 col-md-4 col-sm-5 col-12 tlt mt-3">
+                        <a href="/Detail?id=${x.Id}">
+                            <div class="card-product">
+                                <div class="pd-img">
+                                    <img class="img-product" src="${x.Image}" alt="">
+                                </div>
+                                <div class="infor">
+                                    <div class="name">${x.Name}</div>
+                                    <strong class="price">${(new Intl.NumberFormat('de-DE').format(x.Price))}₫</strong>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `;
                         });
 
+                        $$('.render').innerHTML = products.join('');
                     };
-                    render();
+                    render()
                 },
                 error: function(error) {
                     console.log("Error:");
                     console.log(error);
                 }
+
+
             });
 
         }
-        loadSearch();
+
+    })
 
 </script>
 @RenderSection("scripts", required: false)

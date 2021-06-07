@@ -29,18 +29,14 @@ namespace WebComputerAccessories.Controllers
             return Content(json, "application/json");
         }
 
-        public ActionResult About()
+        [HttpPost]
+        [Route("/Search/{skip=skip}/{take=take}/{keyword=keyword}")]
+        public ContentResult Search(int skip, int take, string keyWord)
         {
-            ViewBag.Message = "Your application description page.";
+            var proct = db.Products.OrderByDescending(x => x.DateCreated).Where(x => x.Name.ToLower().Contains(keyWord.ToLower())).Skip(skip).Take(take).ToList();
+            var json = JsonConvert.SerializeObject(new Product().ConvertListVM(proct));
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return Content(json, "application/json");
         }
 
         protected override void Dispose(bool disposing)
