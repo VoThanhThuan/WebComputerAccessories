@@ -115,7 +115,12 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Order order = db.Orders.Find(id);
+            var order = db.Orders.Find(id);
+
+            var details = db.OrderDetails.Where(x => x.IdOrder == order.Id).ToList();
+            if (details != null)
+                db.OrderDetails.RemoveRange(details);
+
             db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index");

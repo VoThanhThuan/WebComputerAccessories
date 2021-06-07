@@ -124,7 +124,8 @@
                 url: "/Cart/UpdateDecrease?id=" + id,
                 success: function(result) {
                     let q = document.getElementById(quantity);
-                    q.value--;
+                    if(q.value > 0)
+                        q.value--;
                 },
                 error:
                     function(error) {
