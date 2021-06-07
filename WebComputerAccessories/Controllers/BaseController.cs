@@ -13,7 +13,7 @@ namespace WebComputerAccessories.Controllers
         {
             if (Session["MaNguoiDung"] == null)
             {
-                filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { action = "Index", controller = "Home" }));
+                filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { action = "Index", controller = "Login" }));
             }
 
             base.OnActionExecuting(filterContext);
