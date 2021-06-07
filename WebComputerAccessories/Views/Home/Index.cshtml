@@ -8,9 +8,13 @@
 
     <div class="render row"></div>
     
-    <div id="loadMore">
-        <a class="_btn btn-hover">
-            <span style="color: dimgray">Tải Thêm</span>
+    <div id="loadMore" class ="ldM">
+        <a>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Xem Thêm
         </a>
     </div>
 
@@ -29,7 +33,7 @@
                     var render = () => {
                         const products = data.map(x => {
                             return `
-                     <div class="card-wrapper col-lg-3 col-md-4 col-sm-5 col-12 tlt mt-3">
+                     <div class="card-wrapper col-lg-3 col-md-4 col-sm-5 col-12 tlt mt-3 wow zoomInLeft" data-wow-delay="1s">
                         <a href="/Detail?id=${x.Id}">
                             <div class="card-product">
                                 <div class="pd-img">
@@ -47,20 +51,27 @@
 
                         $$('.render').innerHTML += products.join('');
                     };
-                    render();
+                    render()
                 },
                 error: function(error) {
                     console.log("Error:");
                     console.log(error);
                 }
+
+
             });
+            
 
         }
+
         loadProduct();
+       
+
         loadMore.onclick = () => {
             console.log("Tải thêm");
             skip += 10;
             loadProduct();
         }
+
     </script>
 }
