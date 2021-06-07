@@ -144,7 +144,9 @@
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Service\AppUserService.cs" />
+    <Compile Include="Areas\Admin\Service\CartService.cs" />
     <Compile Include="Areas\Admin\Service\ImageService.cs" />
+    <Compile Include="Areas\Admin\Service\OrderService.cs" />
     <Compile Include="Areas\Admin\Service\ProductService.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />

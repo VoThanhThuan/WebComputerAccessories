@@ -117,9 +117,19 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
+            var result1 = new CartService().Delete(id, true);
+            if (!result1.IsSuccessed)
+                ModelState.AddModelError("", result1.Message);
+
+            var result2 = new OrderService().Delete(id, true);
+            if (!result2.IsSuccessed)
+                ModelState.AddModelError("", result2.Message);
+
             var result = new AppUserService().Delete(id);
             if (!result.IsSuccessed)
                 ModelState.AddModelError("", result.Message);
+
+
             return RedirectToAction("Index");
         }
 
