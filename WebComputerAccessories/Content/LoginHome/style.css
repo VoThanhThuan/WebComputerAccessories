@@ -70,8 +70,8 @@ form {
     max-width: 380px;
     width: 100%;
     background-color: #f0f0f0;
-    margin: 10px 0;
-    height: 50px;
+    margin: 5px 0;
+    height: 46px;
     border-radius: 55px;
     display: grid;
     grid-template-columns: 15% 85%;
@@ -274,6 +274,7 @@ form {
 }
 
 @media (max-width: 870px) {
+   
     .container {
         min-height: 800px;
         height: 100vh;
