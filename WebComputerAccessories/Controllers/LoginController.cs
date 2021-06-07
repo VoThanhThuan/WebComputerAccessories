@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FluentResult;
+using WebComputerAccessories.Areas.Admin.Service;
 using WebComputerAccessories.Models;
 using WebComputerAccessories.Models.ViewModel;
 
@@ -20,6 +21,7 @@ namespace WebComputerAccessories.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Index(LoginRequest request)
         {
             if (!ModelState.IsValid) return RedirectToAction("Index", "Home");
@@ -41,6 +43,21 @@ namespace WebComputerAccessories.Controllers
 
             // Quay về trang chủ
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Username,PasswordHash,Email,Firstname,Lastname,PhoneNumber,Dob,AvatarData")] AppUserVM appUser)
+        {
+            if (!ModelState.IsValid) RedirectToAction("Index");
+            appUser.Id = Guid.NewGuid();
+
+            appUser.Role = false;
+            var result = new AppUserService().Create(appUser);
+            if (result.IsSuccessed) return RedirectToAction("Index");
+            ModelState.AddModelError("", result.Message);
+            return RedirectToAction("Index");
+
         }
 
         public ActionResult SignOut()

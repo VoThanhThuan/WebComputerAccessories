@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @*<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">*@
@@ -17,7 +16,8 @@
     <link rel="stylesheet/less" href="/Content/base.less">
     <!--WOW-->
     <link rel="stylesheet/less" href="/Content/wowjs/animate.css">
-    
+    <!--AutoComplete-->
+    <link rel="stylesheet" href="@("https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.1.2/dist/css/autoComplete.min.css")">    
     @RenderSection("css", required: false)
 </head>
 <body>
@@ -34,8 +34,7 @@
                     <li>
                         <form class="form-search">
                             <div class="search">
-                                <input type="text" placeholder="Tìm kiếm...">
-                                <span><i class="fas fa-search"></i></span>
+                                <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" placeholder="Tìm kiếm...">
                             </div>
                         </form>
                     </li>
@@ -164,8 +163,67 @@
 <script src="/Content/less.js"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/4.1.1/less.min.js" integrity="sha512-mE4RWRhILuNDWPx8sl5Q739XNbibSUZP9dEjdepzpYVw1kDco9ZZ5l/+KHAMffzXNHnmSWexMSN+OX137tNL5A==" crossorigin="anonymous"></script>-->
 <script src="/Content/app.js"></script>
+<!--AutoComplete-->
+<script src="@("https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.1.2/dist/autoComplete.min.js")"></script>
+<script>
+        var loadSearch= () => {
+            $.ajax({
+                url: "/Home/GetProductsJson?skip=0&take=60",
+                type: "POST",
+                context: document.body,
+                success: function (data) {
+                    var source = data.map(x => { return x.Name });
+                    console.log(source);
+                    var render = () => {
+                        // autoComplete.js Config Options
+                        const autoCompleteJS = new autoComplete({
+                            selector: "#autoComplete",
+                            placeHolder: "Tìm Kiếm...",
+                            data: {
+                                src: source,
+                                cache: true,
+                            },
+                            resultsList: {
+                                element: (list, data) => {
+                                    if (!data.results.length) {
+                                        // Create "No Results" message element
+                                        const message = document.createElement("div");
+                                        // Add class to the created element
+                                        message.setAttribute("class", "no_result");
+                                        // Add message text content
+                                        message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
+                                        // Append message element to the results list
+                                        list.prepend(message);
+                                    }
+                                },
+                                noResults: true,
+                            },
+                            resultItem: {
+                                highlight: true
+                            },
+                            events: {
+                                input: {
+                                    selection: (event) => {
+                                        const selection = event.detail.selection.value;
+                                        autoCompleteJS.input.value = selection;
+                                    }
+                                }
+                            }                        });
 
 
+                    };
+                    render();
+                },
+                error: function(error) {
+                    console.log("Error:");
+                    console.log(error);
+                }
+            });
+
+        }
+        loadSearch();
+
+</script>
 @RenderSection("scripts", required: false)
 </html>
 
