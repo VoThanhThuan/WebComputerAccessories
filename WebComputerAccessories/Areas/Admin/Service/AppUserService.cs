@@ -12,7 +12,7 @@ namespace WebComputerAccessories.Areas.Admin.Service
 {
     public class AppUserService
     {
-        private WebAccessoriesModel db = new WebAccessoriesModel();
+        private readonly WebAccessoriesModel db = new WebAccessoriesModel();
 
         public Result<string> Create(AppUserVM request)
         {
@@ -51,7 +51,7 @@ namespace WebComputerAccessories.Areas.Admin.Service
         {
             var user = db.AppUsers.Find(id);
             if (user == null) return new ResultError<string>("Mã hàng không tồn tại");
-
+            new CartService().Delete(id);
             new ImageService().DeleteImage(user.Avatar);
 
             db.AppUsers.Remove(user);

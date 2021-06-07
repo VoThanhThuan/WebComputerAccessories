@@ -6,13 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebComputerAccessories.Areas.Admin.Service;
 using WebComputerAccessories.Models;
 
 namespace WebComputerAccessories.Areas.Admin.Controllers
 {
     public class CartsController : Controller
     {
-        private WebAccessoriesModel db = new WebAccessoriesModel();
+        private readonly WebAccessoriesModel db = new WebAccessoriesModel();
 
         // GET: Admin/Carts
         public ActionResult Index()
@@ -102,7 +103,7 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cart cart = db.Carts.Find(id);
+            var cart = db.Carts.Find(id);
             if (cart == null)
             {
                 return HttpNotFound();
@@ -115,9 +116,7 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Cart cart = db.Carts.Find(id);
-            db.Carts.Remove(cart);
-            db.SaveChanges();
+            new CartService().Delete(id);
             return RedirectToAction("Index");
         }
 
