@@ -1,93 +1,117 @@
-﻿@model WebComputerAccessories.Models.AppUser
+﻿@using System.Diagnostics.Eventing.Reader
+@model WebComputerAccessories.Models.ViewModel.AppUserVM
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Edit", "AppUsers", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>AppUser</h4>
-        <hr />
+    <div class="container rounded bg-white mt-5 mb-5">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        <div class="row justify-content-md-center">
+            <div class="col-md-4 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img id="avatarPreview" class="rounded-circle mt-5" width="150px" src="@Model.Avatar">
+                    <span class="font-weight-bold">Ảnh Đại Diện</span>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="file" id="DataImage" class="form-control" data-val="true" name="AvatarData" accept="image/*">
+                            <input type="text" id="Avatar" data-val="true" name="Avatar" value="@Model.Avatar" style="display: none;">
+                            @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <span> </span>
+                </div>
+            </div>
+            <div class="col-md-8 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Tùy Chỉnh Tài Khoản</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PasswordHash, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input class="form-control text-box single-line" data-val="true" data-val-length="The field Mật khẩu must be a string with a maximum length of 255." data-val-length-max="255" id="PasswordHash" name="PasswordHash" type="text" value="">
+                                @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field Ngày Sinh must be a date." id="Dob" name="Dob" type="date" value="@Model.Dob.Value.ToString("yyyy-MM-dd")">
+                                @Html.ValidationMessageFor(model => model.Dob, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="form-check form-switch">
+                                @if (@Model.Role)
+                                {
+                                    <input class="form-check-input" data-val="true" data-val-required="The Quyền field is required." id="flexSwitchCheckDefault" name="Role" type="checkbox" value="true" checked>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" data-val="true" data-val-required="The Quyền field is required." id="flexSwitchCheckDefault" name="Role" type="checkbox" value="true">
+                                }                                <label class="form-check-label" for="flexSwitchCheckDefault">Tài khoản quản trị</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <input type="submit" value="Cập Nhật" class="btn btn-primary" />
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PasswordHash, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Dob, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Dob, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
+
+
+
 }
 
 <div>
@@ -95,5 +119,13 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        DataImage.onchange = evt => {
+            const [file] = DataImage.files;
+            if (file) {
+                previewImg.src = URL.createObjectURL(file);
+                $$('#previewImg').style.display = 'block';
+            }
+        }
+    </script>
 }

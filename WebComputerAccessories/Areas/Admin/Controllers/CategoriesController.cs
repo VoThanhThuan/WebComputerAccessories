@@ -10,7 +10,7 @@ using WebComputerAccessories.Models;
 
 namespace WebComputerAccessories.Areas.Admin.Controllers
 {
-    public class CategoriesController : Controller
+    public class CategoriesController : BaseController
     {
         private WebAccessoriesModel db = new WebAccessoriesModel();
 

@@ -11,23 +11,125 @@
     --nav-height: 60px;
     --space-top: 30px;
 }
+/*Loading*/
+.body-loader {
+    z-index: 9999;
+    position: fixed;
+    width: 100vw;
+    font-family: consolas;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: #121212;
+}
 
+.loader {
+    position: relative;
+    -webkit-box-reflect: below -28px linear-gradient(transparent,#0002);
+}
+
+.loader::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: #03e9f4;
+    animation: blinkCursor .2s steps(1) infinite;
+}
+
+@keyframes blinkCursor {
+    0%,75% {
+        opacity: 1;
+    }
+
+    76%,100% {
+        opacity: 0;
+    }
+}
+
+.loader h2 {
+    position: relative;
+    color: #03e9f4;
+    letter-spacing: 5px;
+    font-size: 4em;
+    text-transform: uppercase;
+    animation: typing 3s steps(10) infinite;
+    overflow: hidden;
+}
+
+@keyframes typing {
+    0%,90%,100% {
+        width: 0;
+    }
+
+    30%,60% {
+        width: 401.88px;
+    }
+}
+/**/
+.btn a:hover{
+    color: unset !important;
+}
+
+td a:hover {
+    color: unset !important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background: #fff;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: var( --main-color);
+}
 a {
     text-decoration: none;
     color: unset;
+    cursor: pointer;
 }
 
-img {
-    max-width: 100%;
-}
-
-svg{
+svg {
     fill: currentColor;
     width: 26px;
     height: 26px;
     cursor: pointer;
-    color: #fff;
     stroke: #fff;
+}
+
+img, svg {
+    vertical-align: unset !important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+    height: 100%;
+}
+body {
+    overflow-x: hidden;
+    background: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#previewImg{
+    width: 100px !important;
 }
 
 .main-color {
@@ -35,9 +137,35 @@ svg{
 }
 
 .container {
-    max-width: 1920px;
+    max-width: 1300px;
     padding: 0 40px;
     margin: auto;
+    flex-grow: 1;
+}
+.margin-footer{
+    flex-grow: 1;
+}
+.row {
+    padding: 0 40px;
+}
+
+@media (min-width: 992px) {
+    .col-lg-3 {
+        flex: 0 0 auto;
+        width: 20%;
+    }
+}
+
+.cl-3 {
+    width: 25%;
+}
+
+.cl-4 {
+    width: 33.33%;
+}
+
+.cl-8 {
+    width: 66.66%;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -82,4 +210,15 @@ svg{
     .cl-sm-12 {
         width: 100%;
     }
+    .container{
+        padding: 0 5px;
+    }
+    .row{
+        padding: 0 10px;
+    }
 }
+
+
+
+
+

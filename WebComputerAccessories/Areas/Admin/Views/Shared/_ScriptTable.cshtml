@@ -1,0 +1,30 @@
+﻿<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tất cả"]],
+                "iDisplayLength": 25,
+                'oLanguage': {
+                    'sProcessing': 'Đang xử lý...',
+                    'sLengthMenu': 'Hiển thị _MENU_ dòng',
+                    'sZeroRecords': 'Không tìm thấy dòng nào phù hợp',
+                    'sInfo': 'Đang xem _START_ đến _END_ trong tổng số _TOTAL_ dòng',
+                    'sInfoEmpty': 'Đang xem 0 đến 0 trong tổng số 0 dòng',
+                    "sEmptyTable": "Không có dữ liệu",
+                    'sInfoFiltered': '(được lọc từ _MAX_ dòng)',
+                    'sInfoPostFix': '',
+                    'sSearch': 'Tìm kiếm:',
+                    'sUrl': '',
+                    'oPaginate': {
+                        'sFirst': '<i class="fal fa-arrow-alt-to-left"></i>',
+                        'sPrevious': '<i class="fal fa-arrow-alt-left"></i>',
+                        'sNext': '<i class="fal fa-arrow-alt-right"></i>',
+                        'sLast': '<i class="fal fa-arrow-alt-to-right"></i>'
+                    }
+                }
+            });
+            $("#example").wrap('<div class="table-responsive"></div>');
+
+        });
+    </script>

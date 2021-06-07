@@ -1,0 +1,159 @@
+﻿@model WebComputerAccessories.Models.ViewModel.CartVM
+
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Payment","Cart", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+
+        <div class="card mt-3">
+            <h5 class="card-header">@ViewBag.Title</h5>
+            <div class="card-body">
+
+                <span>Giỏ hàng chưa có sản phẩm!</span>
+
+
+                <table class="table table-bordered table-hover table-sm">
+                    <thead>
+                    <tr>
+                        <th width="5%">#</th>
+                        <th>Hình ảnh</th>
+                        <th>Sản phẩm</th>
+                        <th width="10%">Số lượng</th>
+                        <th>Đơn giá</th>
+                        <th>Thành tiền</th>
+                        <th>#</th>
+                    </tr>
+
+                    </thead>
+                    <tbody class="render">
+                    </tbody>
+                    <tr>
+                        <td colspan="5">Tổng thành tiền</td>
+                        <td class="text-right font-weight-bold text-primary"></td>
+                    </tr>
+                </table>
+
+                <p>
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tiếp tục mua hàng</a>
+                    <input type="submit" value="Thanh toán" href="/Cart/Payment" class="btn btn-success"/>
+                </p>
+            </div>
+        </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $.ajax({
+            url: "/Cart/GetProductsJson",
+            type: "POST",
+            context: document.body,
+            success: function(data) {
+                var render = () => {
+                    var index = 0;
+                    const products = data.Details.map(x => {
+                        return `
+                                <tr id="row_${x.IdProduct}">
+                                    <td>${++index}</td>
+                                    <td><img src="${x.Image}" width="50" /></td>
+                                    <td>${x.Name}</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <div id="minus" class="input-group-prepend" onClick="minus('${x.Id}', 'quantity_${x.IdProduct}')">
+                                                <span class="input-group-text"><a><i class="fal fa-minus"></i></a></span>
+                                            </div>
+                                            <input id="quantity_${x.IdProduct}" type="text" class="form-control text-center" value="${x.Quantity}" readonly />
+                                            <input id="stock__${x.IdProduct}" type="text" value="${x.Stock}" hidden />
+                                            <div id="plus" class="input-group-append" onClick="plus('${x.Id}' ,'quantity_${x.IdProduct}')">
+                                                <span class="input-group-text"><a><i class="fal fa-plus"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">${x.Price}</td>
+                                    <td>${x.Quantity * x.Price}</td>
+                                    <td> <div id="remove_${x.IdProduct}" onClick="remove('${x.IdProduct}')"><a class="badge rounded-pill bg-danger"><i class="fad fa-trash"></i> Delete </a></div> </td>
+                                </tr>
+                        `;
+                    });
+
+                    $$('.render').innerHTML = products.join('');
+                };
+                render();
+            },
+            error: function(error) {
+                console.log("Error:");
+                console.log(error);
+            }
+        }).done(function() {
+            $(this).addClass("done");
+
+        });
+
+        function plus(id, quantity) {
+            console.log("Tăng số lượng");
+            $.ajax({
+                type: "POST",
+                url: "/Cart/UpdateIncrease?id=" + id,
+                success: function() {
+                    console.log('id số lượng' + quantity);
+                    let q = document.getElementById(quantity);
+                    q.value++;
+                },
+                error:
+                    function(error) {
+                        console.log("Error:");
+                        console.log(error);
+                    }
+            });
+        }
+
+        function minus(id, quantity) {
+            console.log("Giảm số lượng");
+            $.ajax({
+                type: "POST",
+                url: "/Cart/UpdateDecrease?id=" + id,
+                success: function(result) {
+                    let q = document.getElementById(quantity);
+                    if(q.value > 0)
+                        q.value--;
+                },
+                error:
+                    function(error) {
+                        console.log("Error:");
+                        console.log(error);
+                    }
+            });
+
+        }
+
+        function remove(id) {
+            console.log("Xóa sản phẩm");
+            $.ajax({
+                type: "POST",
+                url: "/Cart/Remove?id=" + id,
+                success: function(result) {
+                    let q = document.getElementById('row_'+id);
+                    q.remove();
+                },
+                error:
+                    function(error) {
+                        console.log("Error:");
+                        console.log(error);
+                    }
+            });
+
+        }
+
+    </script>
+
+}

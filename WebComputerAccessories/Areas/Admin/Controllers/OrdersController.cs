@@ -6,11 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebComputerAccessories.Areas.Admin.Service;
 using WebComputerAccessories.Models;
 
 namespace WebComputerAccessories.Areas.Admin.Controllers
 {
-    public class OrdersController : Controller
+    public class OrdersController : BaseController
     {
         private WebAccessoriesModel db = new WebAccessoriesModel();
 
@@ -102,7 +103,7 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
+            var order = db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -115,9 +116,7 @@ namespace WebComputerAccessories.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
-            db.SaveChanges();
+            new OrderService().Delete(id);
             return RedirectToAction("Index");
         }
 

@@ -1,4 +1,4 @@
-namespace WebComputerAccessories.Models
+﻿namespace WebComputerAccessories.Models
 {
     using System;
     using System.Collections.Generic;
@@ -16,6 +16,7 @@ namespace WebComputerAccessories.Models
 
         public int Id { get; set; }
 
+        [Display(Name = "Tên Loại")]
         [StringLength(255)]
         public string Name { get; set; }
 

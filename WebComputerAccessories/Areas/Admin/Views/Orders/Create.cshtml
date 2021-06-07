@@ -1,11 +1,9 @@
 ﻿@model WebComputerAccessories.Models.Order
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Thêm Đặt Hàng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Create</h2>
 
 
 @using (Html.BeginForm()) 
@@ -13,7 +11,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Order</h4>
+        <h4>Thêm Đặt Hàng</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -57,15 +55,15 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-offset-2 col-md-10 mt-3 mb-2">
+                <input type="submit" value="Thêm" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Quay Lại", "Index")
 </div>
 
 @section Scripts {

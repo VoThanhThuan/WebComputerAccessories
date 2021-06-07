@@ -1,4 +1,4 @@
-namespace WebComputerAccessories.Models
+﻿namespace WebComputerAccessories.Models
 {
     using System;
     using System.Collections.Generic;
@@ -11,8 +11,10 @@ namespace WebComputerAccessories.Models
     {
         public Guid Id { get; set; }
 
+        [Display(Name = "Số Lượng")]
         public int? Quantity { get; set; }
 
+        [Display(Name = "Giá")]
         public double? Price { get; set; }
 
         public Guid? IdCart { get; set; }
