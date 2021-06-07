@@ -28,7 +28,8 @@ namespace WebComputerAccessories.Controllers
             var idUser = (Guid)Session["MaNguoiDung"];
 
             var userCart = db.Carts.FirstOrDefault(x => x.IdUser == idUser);
-
+            if (userCart == null)
+                return Content("");
             var details = (from dt in db.CartDetails
                            join p in db.Products on dt.IdProduct equals p.Id
                            where dt.IdCart == userCart.Id
